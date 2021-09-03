@@ -1,0 +1,11 @@
+@import '../index.css';
+
+.container {
+  @apply relative top-16;
+}
+.itemContainer{
+  @apply grid 
+}
+.item {
+  @apply inline-flex gap-4 justify-items-end pl-4 bg-gray-light py-5 border-b
+}
