@@ -1,28 +1,28 @@
-import axios from "axios";
-import { loginError, receiveLogin, requestLogin } from ".";
+import axios from 'axios';
 
-export const loginUser = (creds) => {
+import { loginError, receiveLogin, requestLogin } from '.';
+
+const loginUser = (creds) => {
   const config = {
     mode: 'cors',
     method: 'POST',
     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
     body: `email=${creds.email}&password=${creds.password}`,
   };
-  return dispatch => {
-    dispatch(requestLogin(creds))
-    return axios.get('https://localhost:3001/auth/login', config)
-    .then((response => response.data
-       .then(user => ({user, response }))
-       ).then(({user, response })=> {
-      if (!response.ok) {
-        dispatch(loginError(user.message))
-        return Promise.reject(user)
-      }else{
-        localStorage.setItem('id_token', user.id_token)
+  return (dispatch) => {
+    dispatch(requestLogin(creds));
+    axios.get('https://localhost:3001/auth/login', config)
+      .then((response) => response.data
+        .then((user) => ({ user, response }))).then(({ user, response }) => {
+        if (!response.ok) {
+          dispatch(loginError(user.message));
+          return Promise.reject(user);
+        }
+        localStorage.setItem('auth_token', user.auth_token);
 
-        dispatch(receiveLogin(user))
-      }
-    }).catch(err => console.log(err))
-  }
+        dispatch(receiveLogin(user));
+      }).catch((err) => console.log(err));
+  };
 };
 
+export default loginUser;
