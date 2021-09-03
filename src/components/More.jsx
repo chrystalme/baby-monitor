@@ -8,7 +8,13 @@ const More = ({ header = 'More' }) => (
   <>
     <Nav name={header} />
     <div className={style.container}>
-      <div><img src="" alt="" /></div>
+      <div className={style.itemTop}>
+        <img src="" alt="Profile" />
+        <div>
+          <h4 style={{ lineHeight: '2px' }}>Georgio Armani</h4>
+          <span style={{ fontSize: 10, color: 'blueviolet' }}>Male</span>
+        </div>
+      </div>
       <div className={style.itemContainer}>
         <span className={style.item}>
           <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">

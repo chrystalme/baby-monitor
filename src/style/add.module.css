@@ -1,0 +1,13 @@
+@import '../index.css';
+
+.container {
+  @apply relative top-16;
+}
+
+.itemTop {
+  @apply text-center py-4
+}
+
+.valuePlace {
+  @apply text-center rounded-full h-12 w-12 bg-gray-light
+}

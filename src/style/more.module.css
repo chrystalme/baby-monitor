@@ -4,8 +4,12 @@
   @apply relative top-16;
 }
 .itemContainer{
-  @apply grid 
+  @apply grid text-gray-darkest
 }
 .item {
-  @apply inline-flex gap-4 justify-items-end pl-4 bg-gray-light py-5 border-b
+  @apply inline-flex gap-4 justify-items-end pl-4 
+  bg-gray-light py-3 border-b border-gray-lightest
+}
+.itemTop {
+  @apply flex flex-row gap-4 border-b pl-4 py-4
 }
