@@ -12,7 +12,7 @@ const More = ({ header = 'More' }) => (
         <img src="https://via.placeholder.com/80.png" alt="Profile" />
         <div>
           <h4 style={{ lineHeight: '2px' }}>Georgio Armani</h4>
-          <span style={{ fontSize: 10, color: 'blueviolet' }}>Male</span>
+          <span>Male</span>
         </div>
       </div>
       <div className={style.itemContainer}>

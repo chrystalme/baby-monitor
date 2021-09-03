@@ -11,9 +11,13 @@
   bg-gray-light py-3 border-b border-gray-lightest
 }
 .itemTop {
-  @apply flex flex-row gap-4 border-b pl-4 py-4 items-center
+  @apply flex flex-row gap-4 pl-4 py-4 items-center
 }
 
-,.itemTop img {
-  @apply rounded-full
+.itemTop span {
+  @apply text-blue-dark text-xs
+}
+
+.itemTop img {
+  @apply rounded-full border-blue-dark border
 }

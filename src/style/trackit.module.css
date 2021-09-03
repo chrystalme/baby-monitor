@@ -1,0 +1,13 @@
+@import '../index.css';
+
+.container {
+  @apply relative top-16;
+}
+
+.itemTop {
+  @apply text-center py-4 flex-row flex justify-around items-center
+}
+
+.circularRing {
+  @apply flex gap-2 px-4
+}

@@ -30,7 +30,13 @@ const AddMeasure = ({
         </div>
         <div className={style.btnGroup}>
           <button className={style.btnNext} type="button" name="previous">Prev</button>
-          <button className={style.btnNext} type="button" name="Next">Next</button>
+          <button
+            className={style.btnNext}
+            type="button"
+            name="Next"
+          >
+            Next
+          </button>
         </div>
       </div>
 
