@@ -1,10 +1,10 @@
-import Nav from './Nav';
 import Footer from './Footer';
+import AddMeasure from './AddMeasure';
 
 function App() {
   return (
     <>
-      <Nav />
+      <AddMeasure />
       <Footer />
     </>
   );
