@@ -3,15 +3,15 @@ import PropTypes from 'prop-types';
 import Nav from './Nav';
 import Footer from './Footer';
 
-const Progress = ({ header = 'Your Progress' }) => (
-  <div>
+const More = ({ header = 'More' }) => (
+  <>
     <Nav name={header} />
     <Footer />
-  </div>
+  </>
 );
 
-Progress.propTypes = {
+More.propTypes = {
   header: PropTypes.string.isRequired,
 };
 
-export default Progress;
+export default More;
