@@ -11,5 +11,9 @@
   bg-gray-light py-3 border-b border-gray-lightest
 }
 .itemTop {
-  @apply flex flex-row gap-4 border-b pl-4 py-4
+  @apply flex flex-row gap-4 border-b pl-4 py-4 items-center
+}
+
+,.itemTop img {
+  @apply rounded-full
 }

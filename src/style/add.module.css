@@ -8,6 +8,32 @@
   @apply text-center py-4
 }
 
+.valueContainer {
+  @apply bg-gray-light py-10
+}
+
+.btnGroup {
+  @apply text-center mt-4 p-4
+}
+
+/* .btnGroup:last-child {
+  @apply mb-8
+} */
+
 .valuePlace {
-  @apply text-center rounded-full h-12 w-12 bg-gray-light
+  @apply flex flex-col items-center 
+  justify-center text-center justify-center rounded-full h-64 w-64 
+  bg-gray-lightest mx-auto
+}
+.valuePlace h4 {
+  @apply font-sans font-thin text-3xl
+}
+
+.btnSign {
+  @apply m-1 px-2 py-1 text-gray bg-gray-lightest
+}
+
+.btnNext {
+  @apply px-16 py-4 font-sans font-normal text-xl text-gray bg-gray-lightest rounded-sm
+  hover:bg-green-dark hover:text-gray-lightest hover:scale-75
 }

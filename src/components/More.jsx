@@ -9,7 +9,7 @@ const More = ({ header = 'More' }) => (
     <Nav name={header} />
     <div className={style.container}>
       <div className={style.itemTop}>
-        <img src="" alt="Profile" />
+        <img src="https://via.placeholder.com/80.png" alt="Profile" />
         <div>
           <h4 style={{ lineHeight: '2px' }}>Georgio Armani</h4>
           <span style={{ fontSize: 10, color: 'blueviolet' }}>Male</span>

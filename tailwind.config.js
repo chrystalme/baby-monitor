@@ -34,7 +34,9 @@ module.exports = {
       sans: ['Helvetica Neue', 'sans-serif'],
       serif: ['Merriweather', 'serif'],
     },
-    extend: {},
+    extend: {
+      padding: ['hover'],
+    },
   },
   variants: {
     extend: {},
