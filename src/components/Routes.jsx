@@ -7,6 +7,7 @@ import App from './App';
 import TrackIt from './TrackIt';
 import Progress from './Progress';
 import More from './More';
+import Login from './Login';
 
 const Routes = () => (
   <BrowserRouter>
@@ -16,6 +17,7 @@ const Routes = () => (
       <Route path="/track-it" component={TrackIt} />
       <Route path="/your-progress" component={Progress} />
       <Route path="/more" component={More} />
+      <Route path="/login" component={Login} />
       {/* <Route path="/about" component={About} /> */}
     </Switch>
   </BrowserRouter>

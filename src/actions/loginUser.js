@@ -1,4 +1,4 @@
-import axios from 'axios';
+// import axios from 'axios';
 
 import { loginError, receiveLogin, requestLogin } from '.';
 
@@ -11,9 +11,10 @@ const loginUser = (creds) => {
   };
   return (dispatch) => {
     dispatch(requestLogin(creds));
-    axios.get('https://localhost:3001/auth/login', config)
-      .then((response) => response.data
-        .then((user) => ({ user, response }))).then(({ user, response }) => {
+    return fetch.get('https://localhost:3001/auth/login', config)
+      .then((response) => response.json()
+        .then((user) => ({ user, response })))
+      .then(({ user, response }) => {
         if (!response.ok) {
           dispatch(loginError(user.message));
           return Promise.reject(user);
