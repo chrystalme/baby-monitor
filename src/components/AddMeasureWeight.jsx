@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Nav from './Nav';
 import Footer from './Footer';
@@ -8,7 +9,7 @@ const AddMeasureWeight = ({
   value = 0,
   unit = 'kg',
   header = 'Add Measurement',
-  type = 'Weight',
+  type = 'Body Weight',
 }) => (
   <>
     <Nav name={header} />
@@ -29,15 +30,16 @@ const AddMeasureWeight = ({
           <button className={style.btnSign} type="button" name="minus">+</button>
         </div>
         <div className={style.btnGroup}>
-          <button className={style.btnNext} type="button" name="previous">Prev</button>
-          <button
-            className={style.btnNext}
-            type="button"
-            name="Next"
-
-          >
-            Next
-          </button>
+          <Link to="/add-measure"><button className={style.btnNext} type="button" name="previous">Prev</button></Link>
+          <Link to="/add-measure-3">
+            <button
+              className={style.btnNext}
+              type="button"
+              name="Next"
+            >
+              Next
+            </button>
+          </Link>
         </div>
       </div>
 

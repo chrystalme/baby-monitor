@@ -17,7 +17,7 @@
 }
 
 /* .btnGroup:last-child {
-  @apply mb-8
+  @apply mb-8 gap-1
 } */
 
 .valuePlace {
@@ -35,6 +35,6 @@
 }
 
 .btnNext {
-  @apply px-16 py-4 font-sans font-normal text-xl text-gray bg-gray-lightest rounded-sm
+  @apply px-14 py-4 font-sans font-normal text-xl text-gray bg-gray-lightest rounded-sm
   hover:bg-green-dark hover:text-gray-lightest hover:scale-75
 }

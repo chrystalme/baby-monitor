@@ -5,11 +5,11 @@ import Nav from './Nav';
 import Footer from './Footer';
 import style from '../style/add.module.css';
 
-const AddMeasure = ({
+const AddMeasureFeet = ({
   value = 0,
   unit = 'cm',
   header = 'Add Measurement',
-  type = 'Head circumference',
+  type = 'Feet Length',
 }) => (
   <>
     <Nav name={header} />
@@ -30,8 +30,10 @@ const AddMeasure = ({
           <button className={style.btnSign} type="button" name="minus">+</button>
         </div>
         <div className={style.btnGroup}>
-          <button disabled className={style.btnNext} type="button" name="previous">Prev</button>
-          <Link to="/add-measure-2">
+          <Link to="add-measure-4">
+            <button className={style.btnNext} type="button" name="previous">Prev</button>
+          </Link>
+          <Link to="/add-measure-6">
             {' '}
             <button
               className={style.btnNext}
@@ -51,11 +53,11 @@ const AddMeasure = ({
   </>
 );
 
-AddMeasure.propTypes = {
+AddMeasureFeet.propTypes = {
   value: PropTypes.number.isRequired,
   type: PropTypes.string.isRequired,
   header: PropTypes.string.isRequired,
   unit: PropTypes.string.isRequired,
 };
 
-export default AddMeasure;
+export default AddMeasureFeet;
