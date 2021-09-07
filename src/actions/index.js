@@ -38,3 +38,17 @@ export const receiveLogout = () => ({
   isFetching: false,
   isAuthenticated: false,
 });
+
+// Get Resources measure and Measurement
+export const GET_MEASUREMENT = 'GET_MEASUREMENT';
+export const SET_MEASUREMENT = 'SET_MEASUREMENT';
+
+export const getMeasurement = (data) => ({
+  type: GET_MEASUREMENT,
+  payload: data,
+});
+
+export const setMeasurement = (data) => ({
+  type: SET_MEASUREMENT,
+  payload: data,
+});

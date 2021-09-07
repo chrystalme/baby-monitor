@@ -7,7 +7,7 @@ import App from './App';
 import TrackIt from './TrackIt';
 import Progress from './Progress';
 import More from './More';
-import Login from './Login';
+import Login from '../containers/Login';
 import Register from './Register';
 import AddMeasureWeight from './AddMeasureWeight';
 import AddMeasureHeight from './AddMeasureHeight';

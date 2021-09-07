@@ -5,8 +5,9 @@ import {
 const initialState = {
   isFetching: false,
   isAuthenticated: !!localStorage.getItem('auth_token'),
+  user: {},
 };
-const auth = (state = initialState, action) => {
+const authReducer = (state = initialState, action) => {
   switch (action.type) {
     case LOGIN_REQUEST:
       return {
@@ -41,4 +42,4 @@ const auth = (state = initialState, action) => {
   }
 };
 
-export default auth;
+export default authReducer;

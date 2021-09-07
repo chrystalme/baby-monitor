@@ -1,9 +1,9 @@
-import FrontPage from './FrontPage';
+import AddMeasure from './AddMeasure';
 
 function App() {
   return (
     <>
-      <FrontPage />
+      <AddMeasure />
     </>
   );
 }
