@@ -8,7 +8,7 @@ import TrackIt from './TrackIt';
 import Progress from './Progress';
 import More from './More';
 import Login from '../containers/Login';
-import Register from './Register';
+import Register from '../containers/Register';
 import AddMeasureWeight from './AddMeasureWeight';
 import AddMeasureHeight from './AddMeasureHeight';
 import AddMeasureArm from './AddMeasureArm';

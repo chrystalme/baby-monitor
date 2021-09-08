@@ -14,7 +14,7 @@ const authReducer = (state = initialState, action) => {
         ...state,
         isFetching: true,
         isAuthenticated: false,
-        user: action.creds,
+        user: action.userCreds,
       };
     case LOGIN_SUCCESS:
       return {
