@@ -1,59 +1,86 @@
-import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
-import { loginError, receiveLogin, requestLogin } from '../actions';
+import { connect, useSelector } from 'react-redux';
+// import { PropTypes } from 'prop-types';
+// import * as actionTypes from '../actions/actionTypes';
 // import loginUser from '../actions/loginUser';
-import Login from '../components/Login';
+// import Login from '../components/Login';
+import style from '../style/login.module.css';
+import Nav from '../components/Nav';
+import axiosInstance from '../helpers/axios';
+import { requestLogin } from '../actions';
 
 const LoginUser = () => {
-  const [emailInput, setEmailInput] = useState('');
-  const [passwordInput, setPasswordInput] = useState('');
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    requestLogin.payload({
-      email: emailInput,
-      password: passwordInput,
-    });
-    setEmailInput('');
-    setPasswordInput('');
-  };
+  const [inputs, setInputs] = useState({ email: '', password: '' });
+  const { email, password } = inputs;
+  const auth = useSelector((state) => state.auth);
+  console.log(auth);
 
   const handleChange = (e) => {
-    if (e.target.name === 'email') {
-      setEmailInput(e.target.value);
-    } else if (e.target.name === 'password') {
-      setPasswordInput(e.target.value);
+    const { name, value } = e.target;
+    setInputs((inputs) => ({ ...inputs, [name]: value }));
+  };
+
+  const data = {
+    email,
+    password,
+  };
+
+  const config = {
+    mode: 'cors',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: data,
+  };
+
+  const fetchUser = (config) => (dispatch) => {
+    dispatch(requestLogin(data));
+    const response = axiosInstance.post('/auth/login', config)
+      .catch((e) => e);
+    if (response.ok) {
+      dispatch();
+      console.log(response.data);
+      localStorage.setItem('id_token', response.data.id_token);
+    } else {
+      dispatch();
     }
   };
-  const auth = useSelector((state) => state.auth);
-  // const dispatch = useDispatch();
-  const fetchUser = (creds) => {
-    const config = {
-      mode: 'cors',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: requestLogin.payload,
-    };
-    return (dispatch) => {
-      dispatch(requestLogin(creds));
-      const response = axios.post('http://localhost:3001/auth/login', config)
-        .then((user) => {
-          if (!response.ok) {
-            dispatch(loginError(user.message));
-          }
-          localStorage.setItem('auth_token', user.auth_token);
-
-          dispatch(receiveLogin(user));
-        }).catch((err) => console.log(err));
-    };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    fetchUser(config);
   };
+
   useEffect(() => {
-    fetchUser(requestLogin.payload);
+    fetchUser(requestLogin(data));
   }, []);
-  console.log(auth);
+
   return (
-    <Login header="Login" onSubmit={handleSubmit} onChange={handleChange} />
+    <>
+      <Nav name="Login" />
+      <form onSubmit={handleSubmit} />
+      <div className={style.container}>
+        <form onSubmit={handleSubmit}>
+          <div className={style.itemContainer}>
+            <input type="email" name="email" id="email" placeholder="Enter your email" required onChange={handleChange} />
+            <input type="password" name="password" id="password" placeholder="Enter your password" required onChange={handleChange} />
+            <input className={style.btn} type="submit" value="Login" />
+          </div>
+        </form>
+      </div>
+    </>
   );
 };
 
-export default LoginUser;
+const mapDispatchToProps = () => ({
+  // handleSubmit: (config) => dispatch(handleSubmit(config)),
+});
+
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+});
+
+// LoginUser.propTypes = {
+//   handleSubmit: PropTypes.func.isRequired,
+// };
+
+const ConnectedComponent = connect(mapStateToProps, mapDispatchToProps)(LoginUser);
+
+export default ConnectedComponent;
