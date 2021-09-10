@@ -3,8 +3,8 @@ import axios from 'axios';
 const baseURL = process.env.REACT_APP_BACKEND_URL;
 const headers = {};
 console.log(`BaseUrl: ${baseURL}`);
-if (localStorage.token) {
-  headers.Authorization = localStorage.token;
+if (localStorage.user_token) {
+  headers.Authorization = localStorage.user_token;
 }
 
 const axiosInstance = axios.create(

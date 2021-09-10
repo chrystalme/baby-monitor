@@ -1,28 +1,60 @@
-import axiosInstance from '../helpers/axios';
 import * as actionTypes from './actionTypes';
-// check token and load user
+import AuthService from '../services/auth.service';
 
-const loadUser = () => (dispatch, getState) => {
-  // set loading to true
-  dispatch({ type: actionTypes.LOGIN_REQUEST });
-  // get Token from localstorage
-  const token = getState().auth.idToken;
+export const register = (name, email, password) => (dispatch) => AuthService
+  .register(name, email, password)
+  .then((response) => {
+    dispatch({
+      type: actionTypes.REGISTER_SUCCESS,
+    });
+    dispatch({
+      type: actionTypes.GET_MEASUREMENT,
+      payload: response.data.measurement,
+    });
+    return Promise.resolve();
+  },
+  (error) => {
+    const message = (error.response
+        && error.response.data && error.response.data.message) || error.message
+        || error.toString();
 
-  // Headers
-  const config = {
-    headers: {
-      mode: 'cor',
-      'content-type': 'application/json',
-      Authorization: undefined,
-    },
-  };
+    dispatch({
+      type: actionTypes.REGISTER_FAILURE,
+    });
+    dispatch({
+      type: actionTypes.SET_MEASUREMENT,
+      payload: message,
+    });
+    return Promise.reject();
+  });
 
-  if (token) {
-    config.headers.Authorization = `Bearer ${token}`;
-  }
+export const login = (email, password) => (dispatch) => AuthService.login(email, password)
+  .then((data) => {
+    dispatch({
+      type: actionTypes.LOGIN_SUCCESS,
+      payload: { user: data },
+    });
+    return Promise.resolve();
+  },
+  (error) => {
+    const message = (error.response
+        && error.response.data && error.response.data.message) || error.message
+        || error.toString();
 
-  const response = axiosInstance.post('/auth/login', config);
-  console.log(response);
+    dispatch({
+      type: actionTypes.LOGIN_FAILURE,
+    });
+    dispatch({
+      type: actionTypes.SET_MEASUREMENT,
+      payload: message,
+    });
+    return Promise.reject();
+  });
+
+export const logout = () => (dispatch) => {
+  AuthService.logout();
+
+  dispatch({
+    type: actionTypes.LOGOUT_SUCCESS,
+  });
 };
-
-export default loadUser;
