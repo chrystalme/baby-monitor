@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import { connect } from 'react-redux';
+import React, { useState } from 'react';
+import { connect, useSelector } from 'react-redux';
 // import { PropTypes } from 'prop-types';
-import { getReg, requestLogin } from '../actions';
-import { register } from '../actions/register';
+import { getReg } from '../actions';
+// import { register } from '../actions/authActions';
 import Nav from '../components/Nav';
+// import axiosInstance from '../helpers/axios';
 import style from '../style/login.module.css';
 
 // import Register from '../components/Register';
@@ -11,8 +12,8 @@ import style from '../style/login.module.css';
 const RegisterUser = () => {
   const [inputs, setInputs] = useState({ name: '', email: '', password: '' });
   const { name, email, password } = inputs;
-  // const dispatch = useDispatch();
-
+  const user = useSelector((state) => state.auth.user);
+  console.log(user);
   const data = {
     name,
     email,
@@ -21,13 +22,8 @@ const RegisterUser = () => {
 
   const config = {
     mode: 'cors',
-    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    headers: { 'Content-Type': 'application/JSON' },
     body: data,
-  };
-
-  const fetchRegister = () => (dispatch) => {
-    const response = register(config);
-    dispatch(getReg(response.data));
   };
 
   const handleChange = (e) => {
@@ -38,11 +34,12 @@ const RegisterUser = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(config);
+    // console.log(reg());
   };
-  useEffect(() => {
-    if (!localStorage.getItem('token')) { register(config); }
-    fetchRegister();
-  }, []);
+
+  // useEffect(async () => {
+
+  // });
 
   return (
     <>
@@ -50,10 +47,10 @@ const RegisterUser = () => {
       <div className={style.container}>
         <form onSubmit={handleSubmit}>
           <div className={style.itemContainer}>
-            <input type="text" name="name" id="" placeholder="Enter your name" required onChange={handleChange} />
-            <input type="email" name="email" id="" placeholder="Enter your email" required onChange={handleChange} />
-            <input type="password" name="password" id="" placeholder="Enter your password" required onChange={handleChange} />
-            <input type="password" name="password_confirmation" id="" placeholder="Confirm password" required />
+            <input type="text" value={name} name="name" id="name" placeholder="Enter your name" required onChange={handleChange} />
+            <input type="email" value={email} name="email" id="email" placeholder="Enter your email" required onChange={handleChange} />
+            <input type="password" value={password} name="password" id="password" placeholder="Enter your password" required onChange={handleChange} />
+            <input type="password" name="password_confirmation" id="password_confirmation" placeholder="Confirm password" required />
             <input className={style.btn} type="submit" value="Register" />
           </div>
         </form>
@@ -63,7 +60,8 @@ const RegisterUser = () => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  requestLogin: (book) => dispatch(requestLogin(book)),
+  // register: (name, email, password) => dispatch(register(book)),
+  getReg: (data) => dispatch(getReg(data)),
 });
 
 // RegisterUser.propTypes = {
