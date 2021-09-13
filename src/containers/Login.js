@@ -4,7 +4,7 @@ import { connect, useDispatch, useSelector } from 'react-redux';
 import style from '../style/login.module.css';
 import Nav from '../components/Nav';
 import { login } from '../actions/authActions';
-import axiosInstance from '../helpers/axios';
+// import axiosInstance from '../helpers/axios';
 
 const LoginUser = () => {
   const [inputs, setInputs] = useState({ email: '', password: '' });
@@ -21,14 +21,14 @@ const LoginUser = () => {
   };
   console.log(data);
 
-  const postLogin = async (data) => {
-    const response = await axiosInstance.post('/auth/login', data)
-      .catch((err) => err);
-    dispatch(login(email, password));
-    if (response.ok) {
-      localStorage.setItem('user_token', JSON.stringify(response.data.auth_token));
-    }
-  };
+  // const postLogin = async (data) => {
+  //   const response = await axiosInstance.post('/auth/login', data)
+  //     .catch((err) => err);
+  //   dispatch(login(email, password));
+  //   if (response.ok) {
+  //     localStorage.setItem('user_token', JSON.stringify(response.data.auth_token));
+  //   }
+  // };
   const handleChange = (e) => {
     const { name, value } = e.target;
     setInputs((inputs) => ({ ...inputs, [name]: value }));
@@ -36,7 +36,8 @@ const LoginUser = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    postLogin(data);
+    // postLogin(data);
+    dispatch(login(email, password));
   };
 
   if (isAuthenticated) {

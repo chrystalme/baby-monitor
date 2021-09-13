@@ -4,6 +4,7 @@ import { connect, useSelector } from 'react-redux';
 import { getReg } from '../actions';
 // import { register } from '../actions/authActions';
 import Nav from '../components/Nav';
+import axiosInstance from '../helpers/axios';
 // import axiosInstance from '../helpers/axios';
 import style from '../style/login.module.css';
 
@@ -11,20 +12,33 @@ import style from '../style/login.module.css';
 
 const RegisterUser = () => {
   const [inputs, setInputs] = useState({ name: '', email: '', password: '' });
-  const { name, email, password } = inputs;
+  const {
+    name, email, password, passwordConfirmation,
+  } = inputs;
   const user = useSelector((state) => state.auth.user);
+  // const dispatch = useDispatch();
   console.log(user);
-  const data = {
-    name,
-    email,
-    password,
+  // const data = {
+  //   name,
+  //   email,
+  //   password,
+  // };
+
+  const registerUser = () => {
+    if (user !== '' && email !== '' && password !== '' && password === passwordConfirmation) {
+      const response = axiosInstance
+        .post('/signup', (name, email, password))
+        .catch((e) => e);
+      console.log(response.data);
+      localStorage.setItem('user_token', response.data.auth_token);
+    }
   };
 
-  const config = {
-    mode: 'cors',
-    headers: { 'Content-Type': 'application/JSON' },
-    body: data,
-  };
+  // const config = {
+  //   mode: 'cors',
+  //   headers: { 'Content-Type': 'application/JSON' },
+  //   body: data,
+  // };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -33,13 +47,8 @@ const RegisterUser = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(config);
-    // console.log(reg());
+    registerUser();
   };
-
-  // useEffect(async () => {
-
-  // });
 
   return (
     <>
@@ -50,7 +59,7 @@ const RegisterUser = () => {
             <input type="text" value={name} name="name" id="name" placeholder="Enter your name" required onChange={handleChange} />
             <input type="email" value={email} name="email" id="email" placeholder="Enter your email" required onChange={handleChange} />
             <input type="password" value={password} name="password" id="password" placeholder="Enter your password" required onChange={handleChange} />
-            <input type="password" name="password_confirmation" id="password_confirmation" placeholder="Confirm password" required />
+            <input type="password" value={passwordConfirmation} name="password_confirmation" id="password_confirmation" placeholder="Confirm password" required />
             <input className={style.btn} type="submit" value="Register" />
           </div>
         </form>
