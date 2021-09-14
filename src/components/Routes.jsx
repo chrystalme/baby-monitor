@@ -15,6 +15,7 @@ import AddMeasureArm from './AddMeasureArm';
 import AddMeasureFeet from './AddMeasureFeet';
 import AddMeasureLeg from './AddMeasureLeg';
 import FrontPage from './FrontPage';
+import Measures from '../containers/Measures';
 
 const Routes = () => (
   <BrowserRouter>
@@ -27,6 +28,7 @@ const Routes = () => (
       <Route path="/add-measure-5" component={AddMeasureFeet} />
       <Route path="/add-measure-6" component={AddMeasureLeg} />
       <Route path="/track-it" component={TrackIt} />
+      <Route path="/measures" component={Measures} />
       <Route path="/your-progress" component={Progress} />
       <Route path="/more" component={More} />
       <Route path="/login" component={Login} />

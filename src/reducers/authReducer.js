@@ -1,9 +1,7 @@
 import * as actionTypes from '../actions/actionTypes';
 
-const user = JSON.parse(localStorage.getItem('user_token'));
-const initialState = user
-  ? { isAuthenticated: true, user }
-  : { isAuthenticated: false, user: null };
+// const user = JSON.parse(localStorage.getItem('user_token'));
+const initialState = { isAuthenticated: false, user: null };
 
 const authReducer = (state = initialState, action) => {
   const { type, payload } = action;
@@ -11,7 +9,7 @@ const authReducer = (state = initialState, action) => {
     case actionTypes.REGISTER_SUCCESS:
       return {
         ...state,
-        isAuthenticated: false,
+        isAuthenticated: true,
       };
     case actionTypes.REGISTER_FAILURE:
       return {
@@ -22,7 +20,7 @@ const authReducer = (state = initialState, action) => {
       return {
         ...state,
         isAuthenticated: true,
-        user: payload.user,
+        user: payload,
       };
     case actionTypes.LOGIN_FAILURE:
       return {

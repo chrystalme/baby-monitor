@@ -3,41 +3,21 @@ import { Redirect } from 'react-router-dom';
 import { connect, useDispatch, useSelector } from 'react-redux';
 import style from '../style/login.module.css';
 import Nav from '../components/Nav';
-import { login } from '../actions/authActions';
-// import axiosInstance from '../helpers/axios';
+import { loginUser } from '../actions/authActions';
 
 const LoginUser = () => {
   const [inputs, setInputs] = useState({ email: '', password: '' });
   const { email, password } = inputs;
-  const dispatch = useDispatch();
-  const user = useSelector((state) => state.auth.user);
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
-  console.log(user);
-  console.log(isAuthenticated);
-
-  const data = {
-    email,
-    password,
-  };
-  console.log(data);
-
-  // const postLogin = async (data) => {
-  //   const response = await axiosInstance.post('/auth/login', data)
-  //     .catch((err) => err);
-  //   dispatch(login(email, password));
-  //   if (response.ok) {
-  //     localStorage.setItem('user_token', JSON.stringify(response.data.auth_token));
-  //   }
-  // };
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setInputs((inputs) => ({ ...inputs, [name]: value }));
-  };
+  const dispatch = useDispatch();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // postLogin(data);
-    dispatch(login(email, password));
+    dispatch(loginUser(inputs));
+    setInputs({
+      email: '',
+      password: '',
+    });
   };
 
   if (isAuthenticated) {
@@ -51,8 +31,24 @@ const LoginUser = () => {
       <div className={style.container}>
         <form onSubmit={handleSubmit}>
           <div className={style.itemContainer}>
-            <input type="email" name="email" value={email} id="email" placeholder="Enter your email" required onChange={handleChange} />
-            <input type="password" name="password" value={password} id="password" placeholder="Enter your password" required onChange={handleChange} />
+            <input
+              type="email"
+              name="email"
+              value={email}
+              id="email"
+              placeholder="Enter your email"
+              required
+              onChange={(e) => setInputs({ ...inputs, email: e.target.value })}
+            />
+            <input
+              type="password"
+              name="password"
+              value={password}
+              id="password"
+              placeholder="Enter your password"
+              required
+              onChange={(e) => setInputs({ ...inputs, password: e.target.value })}
+            />
             <input className={style.btn} type="submit" value="Login" />
           </div>
         </form>
@@ -62,8 +58,8 @@ const LoginUser = () => {
   );
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  login: (email, password) => dispatch(login(email, password)),
+const mapDispatchToProps = () => ({
+
 });
 
 const mapStateToProps = (state) => ({

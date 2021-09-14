@@ -1,59 +1,46 @@
+import axiosInstance from '../helpers/axios';
 import * as actionTypes from './actionTypes';
-import AuthService from '../services/auth.service';
 
-export const register = (name, email, password) => (dispatch) => AuthService
-  .register(name, email, password)
-  .then((response) => {
-    dispatch({
-      type: actionTypes.REGISTER_SUCCESS,
+export const registerUser = (user) => (dispatch) => {
+  axiosInstance
+    .post('/signup', user)
+    .then((response) => {
+      localStorage.setItem('user_token', JSON.stringify(response.data));
+      dispatch({
+        type: actionTypes.REGISTER_SUCCESS,
+        user: response.data,
+      });
+    })
+    .catch((err) => {
+      dispatch({
+        type: actionTypes.REGISTER_FAILURE,
+        payload: err,
+      });
     });
-    dispatch({
-      type: actionTypes.GET_MEASUREMENT,
-      payload: response.data.measurement,
-    });
-    return Promise.resolve();
-  },
-  (error) => {
-    const message = (error.response
-        && error.response.data && error.response.data.message) || error.message
-        || error.toString();
+};
 
-    dispatch({
-      type: actionTypes.REGISTER_FAILURE,
+export const loginUser = (user) => (dispatch) => {
+  axiosInstance
+    .post('/auth/login', user)
+    .then((response) => {
+      localStorage.setItem('user_token', JSON.stringify(response.data.auth_token));
+      dispatch({
+        type: actionTypes.LOGIN_SUCCESS,
+        payload: response.data,
+      });
+    }).catch((err) => {
+      dispatch({
+        type: actionTypes.LOGIN_FAILURE,
+        payload: err,
+      });
     });
-    dispatch({
-      type: actionTypes.SET_MEASUREMENT,
-      payload: message,
-    });
-    return Promise.reject();
-  });
-
-export const login = (email, password) => (dispatch) => AuthService.login(email, password)
-  .then((data) => {
-    dispatch({
-      type: actionTypes.LOGIN_SUCCESS,
-      payload: { user: data },
-    });
-    return Promise.resolve();
-  },
-  (error) => {
-    const message = (error.response
-        && error.response.data && error.response.data.message) || error.message
-        || error.toString();
-
-    dispatch({
-      type: actionTypes.LOGIN_FAILURE,
-    });
-    dispatch({
-      type: actionTypes.SET_MEASUREMENT,
-      payload: message,
-    });
-    return Promise.reject();
-  });
+};
 
 export const logout = () => (dispatch) => {
-  AuthService.logout();
-
+  const userToken = localStorage.getItem('user_token');
+  if (userToken) {
+    localStorage.removeItem('user_token');
+  }
   dispatch({
     type: actionTypes.LOGOUT_SUCCESS,
   });
