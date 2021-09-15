@@ -28,6 +28,11 @@ const Measures = () => {
       .catch((err) => err);
   }, [measures.length]);
 
+  // const handlePageChange = (e) => {
+  //   if(e.target.name === 'prev'){
+  //     setCurrentPage(currentPage - 1)
+  //   }
+  // }
   const list = measures
     .slice((currentPage * maxItemsPerPages) - maxItemsPerPages, currentPage * maxItemsPerPages)
     .map((measure) => (
@@ -42,11 +47,10 @@ const Measures = () => {
             className={style.btnNext}
             type="button"
             name="previous"
-            onClick={
-              () => (currentPage < 1
-                ? 'disabled'
-                : setCurrentPage - 1)
-              }
+            onClick={() => (
+              currentPage <= 1
+                ? currentPage
+                : setCurrentPage(currentPage - 1))}
           >
             Prev
           </button>
@@ -55,11 +59,10 @@ const Measures = () => {
             className={style.btnNext}
             type="button"
             name="Next"
-            onClick={
-              () => (currentPage < measures.length
-                ? setCurrentPage + 1
-                : 'disabled')
-              }
+            onClick={() => (
+              currentPage < measures.length
+                ? setCurrentPage(currentPage + 1)
+                : currentPage)}
           >
             Next
           </button>
