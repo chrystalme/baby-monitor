@@ -23,7 +23,14 @@ const AddMeasure = ({
           </div>
           <div className={style.innerContainer}>
             <div className={style.valuePlace}>
-              <h4 contentEditable suppressContentEditableWarning>{value}</h4>
+              <h4
+                onChange={(e) => setValue(e.target.value)}
+                contentEditable
+                suppressContentEditableWarning
+                value={value}
+              >
+                {value}
+              </h4>
               <span>{unit}</span>
             </div>
             <div className={style.btnGroup}>

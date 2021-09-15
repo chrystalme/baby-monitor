@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { connect, useDispatch, useSelector } from 'react-redux';
-// import { Link } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import axiosInstance from '../helpers/axios';
 import AddMeasure from '../components/AddMeasure';
 import { getMeasures } from '../actions/actionTypes';
@@ -11,13 +11,13 @@ const Measures = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [maxItemsPerPages] = useState(1);
   const measures = useSelector((state) => state.measures.measures);
-  const isActive = useSelector((state) => state.measures.isActive);
+  // const isActive = useSelector((state) => state.measures.isActive);
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   const dispatch = useDispatch();
 
-  console.log(isActive);
-  console.log(isAuthenticated);
-
+  if (!isAuthenticated) {
+    <Redirect to="/login" />;
+  }
   useEffect(() => {
     axiosInstance
       .get('/api/v1/measure')
