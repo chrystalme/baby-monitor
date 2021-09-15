@@ -9,16 +9,20 @@
 }
 
 .valueContainer {
-  @apply bg-gray-light py-10
+  @apply  mt-16
 }
 
 .btnGroup {
-  @apply text-center mt-4 p-4
+  @apply text-center p-4
 }
 
 /* .btnGroup:last-child {
   @apply mb-8 gap-1
 } */
+
+.innerContainer {
+  @apply bg-gray-light py-8
+}
 
 .valuePlace {
   @apply flex flex-col items-center 

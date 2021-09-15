@@ -1,9 +1,9 @@
 import * as actionType from '../actions/actionTypes';
 
-export const measureReducer = (state = [], action) => {
+export const measureReducer = (state = { measures: [], isActive: false }, action) => {
   switch (action.type) {
     case actionType.GET_MEASURE:
-      return [...action.payload];
+      return { ...state, measures: action.payload };
     default:
       return state;
   }

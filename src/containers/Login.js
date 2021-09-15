@@ -21,7 +21,7 @@ const LoginUser = () => {
   };
 
   if (isAuthenticated) {
-    return <Redirect to="/add-measure" />;
+    return <Redirect to="/measures" />;
   }
 
   return (
@@ -58,8 +58,8 @@ const LoginUser = () => {
   );
 };
 
-const mapDispatchToProps = () => ({
-
+const mapDispatchToProps = (dispatch) => ({
+  handleSubmit: (e) => dispatch(loginUser(e)),
 });
 
 const mapStateToProps = (state) => ({

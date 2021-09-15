@@ -37,11 +37,12 @@ export const loginUser = (user) => (dispatch) => {
 };
 
 export const logout = () => (dispatch) => {
+  dispatch({
+    type: actionTypes.LOGOUT_SUCCESS,
+  });
+
   const userToken = localStorage.getItem('user_token');
   if (userToken) {
     localStorage.removeItem('user_token');
   }
-  dispatch({
-    type: actionTypes.LOGOUT_SUCCESS,
-  });
 };

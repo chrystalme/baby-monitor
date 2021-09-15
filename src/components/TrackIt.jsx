@@ -20,9 +20,9 @@ const TrackIt = ({ header = 'Track.it'/* value */ }) => (
         </svg>
       </div>
       <div className={style.circularRing}>
-        <CircularProgressbar value="2.78" text="2.78" counterClockwise />
-        <CircularProgressbar value="2.78" counterClockwise />
-        <CircularProgressbar value="2.78" counterClockwise />
+        <CircularProgressbar value="2.78" text="2.78" maxValue="10" counterClockwise />
+        <CircularProgressbar value="8" text="8" maxValue="10" counterClockwise />
+        <CircularProgressbar value="2.78" text="2.78" maxValue="10" counterClockwise />
       </div>
     </div>
     <Footer />
