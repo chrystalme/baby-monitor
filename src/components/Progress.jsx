@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Nav from './Nav';
 import Footer from './Footer';
 
-const Progress = ({ header = 'Your Progress' }) => (
+const Progress = ({ header }) => (
   <div>
     <Nav name={header} />
     <Footer />

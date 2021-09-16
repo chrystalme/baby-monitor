@@ -46,3 +46,9 @@ export const logout = () => (dispatch) => {
     localStorage.removeItem('user_token');
   }
 };
+
+export const returningUser = () => (dispatch) => {
+  dispatch({
+    type: actionTypes.LOGGED_IN,
+  });
+};

@@ -10,11 +10,17 @@ const authReducer = (state = initialState, action) => {
       return {
         ...state,
         isAuthenticated: true,
+        user: payload,
       };
     case actionTypes.REGISTER_FAILURE:
       return {
         ...state,
         isAuthenticated: false,
+      };
+    case actionTypes.LOGGED_IN:
+      return {
+        ...state,
+        isAuthenticated: true,
       };
     case actionTypes.LOGIN_SUCCESS:
       return {
@@ -33,7 +39,6 @@ const authReducer = (state = initialState, action) => {
         isAuthenticated: false,
         user: null,
       };
-
     default:
       return state;
   }

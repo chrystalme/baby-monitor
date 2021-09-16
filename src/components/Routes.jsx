@@ -5,7 +5,7 @@ import {
 import AddMeasure from './AddMeasure';
 import App from './App';
 import TrackIt from './TrackIt';
-import Progress from './Progress';
+import Progress from '../containers/progress';
 import More from './More';
 import Login from '../containers/Login';
 import Register from '../containers/Register';

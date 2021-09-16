@@ -3,13 +3,18 @@ import { Redirect } from 'react-router-dom';
 import { connect, useDispatch, useSelector } from 'react-redux';
 import style from '../style/login.module.css';
 import Nav from '../components/Nav';
-import { loginUser } from '../actions/authActions';
+import { loginUser, returningUser } from '../actions/authActions';
 
 const LoginUser = () => {
   const [inputs, setInputs] = useState({ email: '', password: '' });
   const { email, password } = inputs;
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   const dispatch = useDispatch();
+
+  const user = localStorage.getItem('user_token');
+  if (user) {
+    dispatch(returningUser());
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -19,6 +24,7 @@ const LoginUser = () => {
       password: '',
     });
   };
+  // console.log(isAuthenticated);
 
   if (isAuthenticated) {
     return <Redirect to="/measures" />;

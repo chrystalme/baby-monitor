@@ -6,18 +6,37 @@ import AddMeasure from '../components/AddMeasure';
 import { getMeasures } from '../actions/actionTypes';
 import style from '../style/add.module.css';
 import Footer from '../components/Footer';
+import { getMeasurement } from '../actions/measurement';
+// import { getMeasurement } from '../actions/measurement';
 
 const Measures = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [maxItemsPerPages] = useState(1);
+  const [value, setValue] = useState(0);
+  // const [measured, setMeasured] = useState(0);
   const measures = useSelector((state) => state.measures.measures);
-  // const isActive = useSelector((state) => state.measures.isActive);
+  // const measurements = useSelector((state) => state.measures.measurements);
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   const dispatch = useDispatch();
 
   if (!isAuthenticated) {
-    <Redirect to="/login" />;
+    return (<Redirect to="/login" />);
   }
+  const handleValueChange = (e) => {
+    if (value) {
+      setValue(parseFloat(e.target.value));
+    } else {
+      setValue(e.target.value);
+    }
+  };
+  const decrement = () => {
+    if (value <= 0) {
+      return value;
+    }
+    return setValue(value - 0.5);
+  };
+  const increment = () => setValue(value + 0.5);
+
   useEffect(() => {
     axiosInstance
       .get('/api/v1/measure')
@@ -28,25 +47,32 @@ const Measures = () => {
       .catch((err) => err);
   }, [measures.length]);
 
-  // const handlePageChange = (e) => {
-  //   if(e.target.name === 'prev'){
-  //     setCurrentPage(currentPage - 1)
-  //   }
-  // }
+  useEffect(() => {
+    dispatch(getMeasurement({ /* measure_id: measured, */ value }));
+    return () => {
+      setValue(0);
+    };
+  }, []);
+
   const list = measures
     .slice((currentPage * maxItemsPerPages) - maxItemsPerPages, currentPage * maxItemsPerPages)
     .map((measure) => (
       <div key={measure.attributes.title}>
+        {/* {setMeasured(measure.id)} */}
         <AddMeasure
           header="Add Measurement"
           unit={measure.attributes.unit}
           type={measure.attributes.title}
+          value={value}
+          increment={increment}
+          decrement={decrement}
+          changeHandler={handleValueChange}
         />
         <div className={style.btnGroup}>
           <button
             className={style.btnNext}
             type="button"
-            name="previous"
+            name="Previous"
             onClick={() => (
               currentPage <= 1
                 ? currentPage
@@ -55,17 +81,25 @@ const Measures = () => {
             Prev
           </button>
           {' '}
-          <button
-            className={style.btnNext}
-            type="button"
-            name="Next"
-            onClick={() => (
-              currentPage < measures.length
-                ? setCurrentPage(currentPage + 1)
-                : currentPage)}
-          >
-            Next
-          </button>
+          { currentPage === measures.length
+            ? (<button className={style.btnNext} type="button" name="Submit">Submit</button>)
+            : (
+              <button
+                className={style.btnNext}
+                type="button"
+                name="Next"
+                onClick={() => {
+                  dispatch(getMeasurement(value));
+                  setValue(0);
+                  return (
+                    currentPage < measures.length
+                      ? setCurrentPage(currentPage + 1)
+                      : currentPage);
+                }}
+              >
+                Next
+              </button>
+            )}
 
         </div>
         <Footer />
@@ -77,6 +111,7 @@ const Measures = () => {
     <>{list}</>
   );
 };
+
 const ConnectedComponent = connect()(Measures);
 
 export default ConnectedComponent;

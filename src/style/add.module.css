@@ -29,9 +29,8 @@
   justify-center text-center rounded-full h-64 w-64 
   bg-gray-lightest mx-auto
 }
-.valuePlace h4 {
-  @apply font-sans font-thin text-3xl;
-  contenteditable: "true"
+.valuePlace input {
+  @apply font-sans font-thin text-3xl bg-gray-lightest w-16 text-center;
 }
 
 .btnSign {
