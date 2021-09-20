@@ -9,10 +9,12 @@ export const measureReducer = (state = { measures: [], isActive: false }, action
   }
 };
 
-export const measurementReducer = (state = [], action) => {
+export const measurementReducer = (state = { items: [] }, action) => {
   switch (action.type) {
     case actionType.GET_MEASUREMENT:
-      return ({ ...state, measurements: action.payload });
+      return { items: [...state.items, action.payload] };
+    case actionType.SET_MEASUREMENT:
+      return { items: [...state.items, action.payload] };
     default:
       return state;
   }
