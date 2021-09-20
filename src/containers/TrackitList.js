@@ -1,16 +1,13 @@
 import React, { useEffect } from 'react';
-import { connect, useDispatch/* , useSelector */ } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { PropTypes } from 'prop-types';
 import { setMeasurement } from '../actions/measurement';
 import TrackIt from '../components/TrackIt';
 import axiosInstance from '../helpers/axios';
 
-const TrackitList = ({ measurements }) => {
+const TrackitList = () => {
   const dispatch = useDispatch();
-  // const measurements = useSelector((state) => state.measurements.items[0]);
-  // const { items } = measurements;
-  // const { attributes } = items;
-  // const { value, date } = attributes;
+  const measurements = useSelector((state) => state.measurements);
 
   useEffect(() => {
     axiosInstance.get('/api/v1/measure/1/measurement')
@@ -21,28 +18,13 @@ const TrackitList = ({ measurements }) => {
       .catch((err) => err);
   }, []);
   console.log(measurements);
-  const measured = measurements.items[0].map((measurement) => (
-    <div key={measurement.attributes.id}>
-      <h3>{measurement.attributes.value}</h3>
-      <h3>{measurement.attributes.date}</h3>
-    </div>
-  ));
 
   return (
     <>
       <TrackIt header="Track it" />
-      {measured}
     </>
   );
 };
-
-const mapStateToProps = (state) => ({
-  measurements: state.measurements.items[0],
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  setMeasurement: (e) => dispatch(setMeasurement(e)),
-});
 
 TrackitList.propTypes = {
   measurements: PropTypes.shape({
@@ -53,4 +35,4 @@ TrackitList.propTypes = {
   }).isRequired,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(TrackitList);
+export default TrackitList;

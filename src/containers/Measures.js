@@ -83,14 +83,14 @@ const Measures = () => {
           </button>
           {' '}
           { currentPage === measures.length
-            ? (<button className={style.btnNext} type="button" onClick={() => { dispatch(getMeasurement(value)); setValue(0); }} name="Submit">Submit</button>)
+            ? (<button className={style.btnNext} type="button" onClick={() => { dispatch(getMeasurement(measure.id, value)); setValue(0); }} name="Submit">Submit</button>)
             : (
               <button
                 className={style.btnNext}
                 type="button"
                 name="Next"
                 onClick={() => {
-                  dispatch(getMeasurement(value));
+                  dispatch(getMeasurement(measure.id, value));
                   setValue(0);
                   return (
                     currentPage < measures.length
