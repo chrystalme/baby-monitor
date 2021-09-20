@@ -8,11 +8,16 @@ export const measureReducer = (state = { measures: [], isActive: false }, action
       return state;
   }
 };
-
-export const measurementReducer = (state = [], action) => {
+const initialMeasure = {
+  measure_id: null,
+  value: null,
+};
+export const measurementReducer = (state = initialMeasure, action) => {
   switch (action.type) {
     case actionType.GET_MEASUREMENT:
-      return ({ ...state, measurements: action.payload });
+      return { ...state, measureId: action.measureId, value: action.value };
+    case actionType.SET_MEASUREMENT:
+      return { items: [...state.items, action.payload] };
     default:
       return state;
   }
