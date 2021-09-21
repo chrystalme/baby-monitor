@@ -72,14 +72,31 @@ const Measures = () => {
           </button>
           {' '}
           { currentPage === measures.length
-            ? (<button className={style.btnNext} type="button" onClick={() => { dispatch(getMeasurement(measure.id, value)); setValue(0); }} name="Submit">Submit</button>)
+            ? (
+              <button
+                className={style.btnNext}
+                type="button"
+                onClick={
+                  () => {
+                    dispatch(
+                      getMeasurement(parseInt(measure.id, 10), value),
+                    );
+                    // setValue(0);
+                      <Redirect to="/track-it" />;
+                  }
+}
+                name="Submit"
+              >
+                Submit
+              </button>
+            )
             : (
               <button
                 className={style.btnNext}
                 type="button"
                 name="Next"
                 onClick={() => {
-                  dispatch(getMeasurement(measure.id, value));
+                  dispatch(getMeasurement(parseInt(measure.id, 10), value));
                   setValue(0);
                   return (
                     currentPage < measures.length
