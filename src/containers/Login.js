@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Redirect } from 'react-router-dom';
+import { Redirect, useHistory } from 'react-router-dom';
 import { connect, useDispatch, useSelector } from 'react-redux';
 import style from '../style/login.module.css';
 import Nav from '../components/Nav';
@@ -10,6 +10,7 @@ const LoginUser = () => {
   const { email, password } = inputs;
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const user = localStorage.getItem('user_token');
   if (user) {
@@ -24,9 +25,11 @@ const LoginUser = () => {
       password: '',
     });
   };
-  // console.log(isAuthenticated);
+  console.log(isAuthenticated);
 
   if (isAuthenticated) {
+    // check history if it is working
+    history.push('/measures');
     return <Redirect to="/measures" />;
   }
 

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { connect, useDispatch, useSelector } from 'react-redux';
 import { PropTypes } from 'prop-types';
 import { setMeasurement } from '../actions/measurement';
 import TrackIt from '../components/TrackIt';
@@ -8,16 +8,22 @@ import axiosInstance from '../helpers/axios';
 const TrackitList = () => {
   const dispatch = useDispatch();
   const measurements = useSelector((state) => state.measurements);
+  console.log(measurements);
 
-  useEffect(() => {
-    axiosInstance.get('/api/v1/measure/1/measurement')
+  //  Check to see whether the page works now with fetch and dispatch
+  const fetchMeasurements = () => {
+    axiosInstance.get('/api/v1/measurement')
       .then((res) => {
-        dispatch(setMeasurement(res.data.data));
-        // console.log(res.data.data);
+        const { data } = res.data;
+        console.log(data);
+        return data;
       })
       .catch((err) => err);
-  }, []);
-  console.log(measurements);
+  };
+
+  useEffect(() => {
+    dispatch(setMeasurement(fetchMeasurements()));
+  }, [measurements.length]);
 
   return (
     <>
@@ -35,4 +41,10 @@ TrackitList.propTypes = {
   }).isRequired,
 };
 
-export default TrackitList;
+const mapDispatchToProps = () => ({
+  setMeasurement,
+});
+
+const ConnectedComponent = connect(null, mapDispatchToProps)(TrackitList);
+
+export default ConnectedComponent;

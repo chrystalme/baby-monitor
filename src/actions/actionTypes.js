@@ -13,6 +13,7 @@ export const GET_MEASUREMENT = 'GET_MEASUREMENT';
 export const GET_MEASURE = 'GET_MEASURE';
 export const SET_MEASUREMENT = 'SET_MEASUREMENT';
 export const LOGGED_IN = 'LOGGED_IN';
+export const GET_USER = 'GET_USER';
 
 export const getMeasures = (measure) => ({
   type: GET_MEASURE,

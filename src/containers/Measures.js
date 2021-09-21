@@ -13,11 +13,9 @@ const Measures = () => {
   const [maxItemsPerPages] = useState(1);
   const [value, setValue] = useState(0);
   const measures = useSelector((state) => state.measures.measures);
-  const measurements = useSelector((state) => state.measurements);
+  // const measurements = useSelector((state) => state.measurements);
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   const dispatch = useDispatch();
-
-  console.log(measurements.items);
 
   if (!isAuthenticated) {
     return (<Redirect to="/login" />);
@@ -42,23 +40,14 @@ const Measures = () => {
       .get('/api/v1/measure')
       .then((response) => {
         dispatch(getMeasures(response.data.data));
-        // console.log(response.data.data);
       })
       .catch((err) => err);
   }, [measures.length]);
-
-  // useEffect(() => {
-  //   dispatch(getMeasurement(value));
-  //   return () => {
-  //     setValue(0);
-  //   };
-  // }, []);
 
   const list = measures
     .slice((currentPage * maxItemsPerPages) - maxItemsPerPages, currentPage * maxItemsPerPages)
     .map((measure) => (
       <div key={measure.attributes.title}>
-        {console.log(measure.id)}
         <AddMeasure
           header="Add Measurement"
           unit={measure.attributes.unit}

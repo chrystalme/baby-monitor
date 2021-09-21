@@ -52,3 +52,14 @@ export const returningUser = () => (dispatch) => {
     type: actionTypes.LOGGED_IN,
   });
 };
+
+export const getUser = () => (dispatch) => {
+  axiosInstance
+    .get('/user_info')
+    .then((response) => {
+      dispatch({
+        type: actionTypes.GET_USER,
+        payload: response.data.data,
+      });
+    }).catch((err) => err);
+};
