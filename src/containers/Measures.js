@@ -59,7 +59,6 @@ const Measures = () => {
         />
         <div className={style.btnGroup}>
           <button
-            disabled
             className={style.btnNext}
             type="button"
             name="Previous"
