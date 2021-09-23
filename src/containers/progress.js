@@ -1,12 +1,19 @@
 import React, { useEffect } from 'react';
-import Progress from '../components/Progress';
+import { useDispatch } from 'react-redux';
 import axiosInstance from '../helpers/axios';
+import Nav from '../components/Nav';
+import Footer from '../components/Footer';
+import { setMeasurement } from '../actions/measurement';
 
 const progress = () => {
+  const dispatch = useDispatch();
   const getMeasurements = () => {
     axiosInstance
-      .get('/api/v1/measure/1/measurement')
-      .then((response) => console.log(response.data))
+      .get('/api/v1/measurement')
+      .then((response) => {
+        console.log(response.data);
+        dispatch(setMeasurement(response.data));
+      })
       .catch((err) => err);
   };
 
@@ -15,8 +22,8 @@ const progress = () => {
   }, []);
   return (
     <div>
-      Hello from progress
-      <Progress header="Your Progress" />
+      <Nav name="My Progress" />
+      <Footer />
     </div>
   );
 };

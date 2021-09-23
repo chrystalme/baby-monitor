@@ -13,7 +13,6 @@ const Measures = () => {
   const [maxItemsPerPages] = useState(1);
   const [value, setValue] = useState(0);
   const measures = useSelector((state) => state.measures.measures);
-  // const measurements = useSelector((state) => state.measurements);
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   const dispatch = useDispatch();
 

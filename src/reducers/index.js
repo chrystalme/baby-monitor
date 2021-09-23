@@ -1,11 +1,10 @@
 import { combineReducers } from 'redux';
 import authReducer from './authReducer';
-import errorsReducer from './errorsReducer';
-import { measurementReducer, measureReducer } from './measureReducer';
+import measureReducer from './measureReducer';
+import measurementReducer from './measurementReducer';
 
 const rootReducer = combineReducers({
   auth: authReducer,
-  errors: errorsReducer,
   measures: measureReducer,
   measurements: measurementReducer,
 });

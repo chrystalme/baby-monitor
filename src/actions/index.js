@@ -1,12 +1,5 @@
 import * as actionTypes from './actionTypes';
 
-// const initialState = {
-//   idToken: localStorage.getItem('id_token'),
-//   isAuthenticated: null,
-//   isLoading: false,
-//   user: null,
-// };
-
 export const requestLogin = () => ({
   type: actionTypes.LOGIN_REQUEST,
   isLoading: true,

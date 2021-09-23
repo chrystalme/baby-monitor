@@ -36,16 +36,10 @@ export const loginUser = (user) => (dispatch) => {
     });
 };
 
-export const logout = () => (dispatch) => {
-  dispatch({
-    type: actionTypes.LOGOUT_SUCCESS,
-  });
+export const logout = () => ({
+  type: actionTypes.LOGOUT_SUCCESS,
 
-  const userToken = localStorage.getItem('user_token');
-  if (userToken) {
-    localStorage.removeItem('user_token');
-  }
-};
+});
 
 export const returningUser = () => (dispatch) => {
   dispatch({
