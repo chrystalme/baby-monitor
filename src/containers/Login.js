@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Redirect, useHistory } from 'react-router-dom';
 import { connect, useDispatch, useSelector } from 'react-redux';
+import { setMeasurement } from '../actions/measurement';
 import style from '../style/login.module.css';
 import Nav from '../components/Nav';
-import { loginUser, returningUser } from '../actions/authActions';
+import { getUser, loginUser, returningUser } from '../actions/authActions';
+import axiosInstance from '../helpers/axios';
 
 const LoginUser = () => {
   const [inputs, setInputs] = useState({ email: '', password: '' });
@@ -25,13 +27,35 @@ const LoginUser = () => {
       password: '',
     });
   };
-  console.log(isAuthenticated);
+
+  const setMeasurements = () => {
+    axiosInstance
+      .get('/api/v1/measurement')
+      .then((response) => {
+        const { data } = response.data;
+        dispatch(setMeasurement(data));
+      })
+      .catch((err) => err);
+  };
+  useEffect(() => {
+    setMeasurements();
+  }, []);
+
+  useEffect(() => {
+    axiosInstance.get('/user_info')
+      .then((res) => {
+        const { data } = res.data;
+        dispatch(getUser(data));
+      })
+      .catch((err) => err);
+  }, []);
 
   if (isAuthenticated) {
     // check history if it is working
     history.push('/measures');
     return <Redirect to="/measures" />;
   }
+  console.log(history);
 
   return (
     <>

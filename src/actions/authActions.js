@@ -38,7 +38,6 @@ export const loginUser = (user) => (dispatch) => {
 
 export const logout = () => ({
   type: actionTypes.LOGOUT_SUCCESS,
-
 });
 
 export const returningUser = () => (dispatch) => {

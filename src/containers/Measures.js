@@ -15,8 +15,10 @@ const Measures = () => {
   const measures = useSelector((state) => state.measures.measures);
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   const dispatch = useDispatch();
+  // const history = useHistory();
 
   if (!isAuthenticated) {
+    // history.push('/login');
     return (<Redirect to="/login" />);
   }
   const handleValueChange = (e) => {

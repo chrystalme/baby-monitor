@@ -1,14 +1,14 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { connect, useDispatch } from 'react-redux';
+import { connect, useDispatch, useSelector } from 'react-redux';
 import Nav from './Nav';
 import Footer from './Footer';
 import style from '../style/more.module.css';
 import { logout } from '../actions/authActions';
-import axiosInstance from '../helpers/axios';
 
 const More = ({ header = 'More' }) => {
+  const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const handleLogout = () => {
     const userToken = localStorage.getItem('user_token');
@@ -17,12 +17,7 @@ const More = ({ header = 'More' }) => {
     }
     dispatch(logout());
   };
-
-  useEffect(() => {
-    axiosInstance.get('/user_info')
-      .then((res) => console.log(res.data))
-      .catch((err) => err);
-  }, []);
+  // console.log(user.user.attributes.name);
 
   return (
     <>
@@ -31,7 +26,7 @@ const More = ({ header = 'More' }) => {
         <div className={style.itemTop}>
           <img src="https://via.placeholder.com/80.png" alt="Profile" />
           <div>
-            <h4 style={{ lineHeight: '2px' }}>Georgio Armani</h4>
+            <h4 style={{ lineHeight: '2px' }}>{user.user.attributes.name}</h4>
             <span>Male</span>
           </div>
         </div>
