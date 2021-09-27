@@ -1,57 +1,75 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
-// import PropTypes from 'prop-types';
+import Measurement from '../components/Measurement';
 import Nav from '../components/Nav';
 import Footer from '../components/Footer';
 import 'react-circular-progressbar/dist/styles.css';
 import TrackItDate from '../components/TrackItDate';
+import { readableDate, groupMeasurementByCreatedAt } from '../helpers/utils';
+import style from '../style/trackit.module.css';
+// import { setMeasurement } from '../actions/measurement';
 
 const TrackitList = () => {
   const measurements = useSelector((state) => state.measurements);
+
   const [currentPage, setCurrentPage] = useState(1);
   const [maxItemsPerPages] = useState(1);
   const myData = measurements.measurements;
+
+  const convertedData = myData.map((data) => {
+    const newData = {};
+    newData.value = data.value;
+    newData.user_id = data.user_id;
+    newData.measure_id = data.measure_id;
+    newData.created_at = readableDate(data.created_at);
+    return (newData);
+  });
+
+  console.log(convertedData);
+  const result = groupMeasurementByCreatedAt(convertedData, 'created_at');
+  console.log(result);
+
+  const dateAndDetails = Object.keys(result);
+  console.log(dateAndDetails);
 
   const handlePrev = () => (
     currentPage <= 1 ? currentPage : setCurrentPage(currentPage - 1)
   );
   const handleNext = () => (
-    currentPage < myData.length
+    currentPage < dateAndDetails.length
       ? setCurrentPage(currentPage + 1)
       : currentPage);
 
-  const listTop = myData
+  const listTop = dateAndDetails
     .slice((currentPage * maxItemsPerPages) - maxItemsPerPages, currentPage * maxItemsPerPages)
-    .map((measurement) => {
-      const date = new Date(measurement.attributes.created_at);
-      const convertedDate = date.toDateString();
-      return (
-        <TrackItDate
-          key={measurement.id}
-          createdAt={convertedDate}
-          prev={handlePrev}
-          next={handleNext}
-          value={measurement.attributes.value}
-          text={measurement.attributes.value}
-        />
-      );
-    });
+    .map((measurement) => (
+      <TrackItDate
+        key={measurement.id}
+        createdAt={measurement}
+        prev={handlePrev}
+        next={handleNext}
+      />
+    ));
+    // value.value
+  console.log(currentPage - 1);
+  const listDetails = Object.values(result)[currentPage - 1]
+    .map((value) => (
+      <Measurement key={value.id} value={value.value} text={value.value} />
+    ));
+
   return (
     (
       <>
         <Nav name="Track it" />
         {listTop}
+        <div className={style.ringContainer}>
+          {listDetails}
+        </div>
         <Footer />
       </>
     )
 
   );
 };
-
-// const mapDispatchToProps = () => ({
-//   setMeasurement,
-// });
-
-// const ConnectedComponent = connect(null, mapDispatchToProps)(TrackitList);
 
 export default TrackitList;

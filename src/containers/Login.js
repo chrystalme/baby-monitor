@@ -32,7 +32,7 @@ const LoginUser = () => {
     axiosInstance
       .get('/api/v1/measurement')
       .then((response) => {
-        const { data } = response.data;
+        const { data } = response;
         dispatch(setMeasurement(data));
       })
       .catch((err) => err);
@@ -55,7 +55,6 @@ const LoginUser = () => {
     history.push('/measures');
     return <Redirect to="/measures" />;
   }
-  console.log(history);
 
   return (
     <>

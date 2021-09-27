@@ -8,6 +8,10 @@
   @apply text-center py-4 flex-row flex justify-around items-center
 }
 
+.ringContainer {
+  @apply flex flex-row gap-2 flex-wrap justify-center items-center mt-20
+}
+
 .circularRing {
-  @apply flex gap-2 px-4
+  @apply px-4 w-2/5 h-2/5
 }

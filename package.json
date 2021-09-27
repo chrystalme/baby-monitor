@@ -9,6 +9,7 @@
     "@testing-library/user-event": "^12.8.3",
     "autoprefixer": "^9.8.6",
     "axios": "^0.21.1",
+    "lodash": "^4.17.21",
     "prop-types": "^15.7.2",
     "react": "^17.0.2",
     "react-circular-progressbar": "^2.0.4",
@@ -17,10 +18,10 @@
     "react-router-dom": "^5.2.1",
     "react-scripts": "4.0.3",
     "redux": "^4.1.1",
+    "redux-devtools-extension": "^2.13.9",
     "redux-thunk": "^2.3.0",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.2.9",
-    "web-vitals": "^1.1.2",
-    "redux-devtools-extension": "^2.13.9"
+    "web-vitals": "^1.1.2"
   },
   "scripts": {
     "start": "craco start",

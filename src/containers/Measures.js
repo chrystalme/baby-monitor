@@ -40,7 +40,7 @@ const Measures = () => {
     axiosInstance
       .get('/api/v1/measure')
       .then((response) => {
-        dispatch(getMeasures(response.data.data));
+        dispatch(getMeasures(response.data));
       })
       .catch((err) => err);
   }, [measures.length]);
@@ -48,11 +48,11 @@ const Measures = () => {
   const list = measures
     .slice((currentPage * maxItemsPerPages) - maxItemsPerPages, currentPage * maxItemsPerPages)
     .map((measure) => (
-      <div key={measure.attributes.title}>
+      <div key={measure.title}>
         <AddMeasure
           header="Add Measurement"
-          unit={measure.attributes.unit}
-          type={measure.attributes.title}
+          unit={measure.unit}
+          type={measure.title}
           value={value}
           increment={increment}
           decrement={decrement}
