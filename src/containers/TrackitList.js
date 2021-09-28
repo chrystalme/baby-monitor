@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
+// import { compact } from 'lodash';
 import Measurement from '../components/Measurement';
 import Nav from '../components/Nav';
 import Footer from '../components/Footer';
 import 'react-circular-progressbar/dist/styles.css';
 import TrackItDate from '../components/TrackItDate';
-import { readableDate, groupMeasurementByCreatedAt/* , groupMeasurementByMeasureId */ } from '../helpers/utils';
+import { readableDate, groupMeasurementByCreatedAt } from '../helpers/utils';
 import style from '../style/trackit.module.css';
 
 const TrackitList = () => {
@@ -23,10 +24,13 @@ const TrackitList = () => {
     newData.user_id = data.user_id;
     newData.measure_id = data.measure_id;
     newData.created_at = readableDate(data.created_at);
+    const title = myMeasure
+      .filter((measure) => (data.measure_id === measure.id ? measure.title : ''));
+    newData.title = title[0].title;
     return (newData);
   });
 
-  // console.log(convertedData);
+  console.log(convertedData);
   const result = groupMeasurementByCreatedAt(convertedData, 'created_at');
   // const result2 = groupMeasurementByMeasureId(convertedData, 'measure_id');
   // console.log(result2);
@@ -60,7 +64,9 @@ const TrackitList = () => {
         key={value.id}
         value={value.value}
         text={value.value}
-        title={myMeasure.map((measure) => (value.measure_id === measure.id ? measure.title : ''))}
+        title={value.title}
+        // title={myMeasure
+        // .map((measure) => (value.measure_id === measure.id ? measure.title : ''))}
       />
     ));
 
