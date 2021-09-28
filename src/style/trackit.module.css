@@ -13,5 +13,5 @@
 }
 
 .circularRing {
-  @apply px-4 w-2/5 h-2/5
+  @apply px-4 w-2/5 h-2/5 flex flex-col
 }

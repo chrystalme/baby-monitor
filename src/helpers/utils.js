@@ -1,7 +1,7 @@
-import { mergeWith, groupBy } from 'lodash';
+import { groupBy, union } from 'lodash';
 
-export const mergeMeasureWithMeasurement = (measures, measurements, customizer) => {
-  const mergedObject = mergeWith(measurements, measures, customizer);
+export const mergeMeasureWithMeasurement = (measures, measurements) => {
+  const mergedObject = union(measurements, measures);
   return (
     mergedObject
   );
@@ -19,4 +19,38 @@ export const groupMeasurementByCreatedAt = (measurements, date) => {
   return (
     groupedMeasurements
   );
+};
+
+export const groupMeasurementByMeasureId = (measurements, id) => {
+  const groupedMeasurements = groupBy(measurements, id);
+  return (
+    groupedMeasurements
+  );
+};
+
+export const getMeasurements = (measures, measurements) => {
+  for (let i = 0; i < measurements.length; i += 1) {
+    const hashedMeasures = {};
+    const hashedMeasurements = {};
+
+    measures.forEach((measure) => {
+      hashedMeasures[measure.id] = { ...measure };
+    });
+
+    measurements.forEach((measurement) => {
+      hashedMeasurements[measurement.measure_id] = { ...measurement };
+    });
+
+    const measuresIds = Object.keys(hashedMeasures);
+
+    return measuresIds.map((id) => ({
+      id,
+      title: hashedMeasures[id].title,
+      image: hashedMeasures[id].image,
+      unit: hashedMeasures[id].unit,
+      value: hashedMeasurements[id].value,
+    }));
+  }
+
+  return [];
 };

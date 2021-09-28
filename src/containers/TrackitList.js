@@ -5,16 +5,17 @@ import Nav from '../components/Nav';
 import Footer from '../components/Footer';
 import 'react-circular-progressbar/dist/styles.css';
 import TrackItDate from '../components/TrackItDate';
-import { readableDate, groupMeasurementByCreatedAt } from '../helpers/utils';
+import { readableDate, groupMeasurementByCreatedAt/* , groupMeasurementByMeasureId */ } from '../helpers/utils';
 import style from '../style/trackit.module.css';
-// import { setMeasurement } from '../actions/measurement';
 
 const TrackitList = () => {
   const measurements = useSelector((state) => state.measurements);
+  const measures = useSelector((state) => state.measures);
 
   const [currentPage, setCurrentPage] = useState(1);
   const [maxItemsPerPages] = useState(1);
   const myData = measurements.measurements;
+  const myMeasure = measures.measures;
 
   const convertedData = myData.map((data) => {
     const newData = {};
@@ -25,12 +26,13 @@ const TrackitList = () => {
     return (newData);
   });
 
-  console.log(convertedData);
+  // console.log(convertedData);
   const result = groupMeasurementByCreatedAt(convertedData, 'created_at');
-  console.log(result);
+  // const result2 = groupMeasurementByMeasureId(convertedData, 'measure_id');
+  // console.log(result2);
 
   const dateAndDetails = Object.keys(result);
-  console.log(dateAndDetails);
+  // console.log(dateAndDetails);
 
   const handlePrev = () => (
     currentPage <= 1 ? currentPage : setCurrentPage(currentPage - 1)
@@ -51,10 +53,15 @@ const TrackitList = () => {
       />
     ));
     // value.value
-  console.log(currentPage - 1);
+  // console.log(currentPage - 1);
   const listDetails = Object.values(result)[currentPage - 1]
     .map((value) => (
-      <Measurement key={value.id} value={value.value} text={value.value} />
+      <Measurement
+        key={value.id}
+        value={value.value}
+        text={value.value}
+        title={myMeasure.map((measure) => (value.measure_id === measure.id ? measure.title : ''))}
+      />
     ));
 
   return (

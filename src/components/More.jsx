@@ -1,13 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import { connect, useDispatch, useSelector } from 'react-redux';
 import Nav from './Nav';
 import Footer from './Footer';
 import style from '../style/more.module.css';
 import { logout } from '../actions/authActions';
 
-const More = ({ header = 'More' }) => {
+const More = () => {
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const handleLogout = () => {
@@ -21,7 +21,7 @@ const More = ({ header = 'More' }) => {
 
   return (
     <>
-      <Nav name={header} />
+      <Nav name="More" />
       <div className={style.container}>
         <div className={style.itemTop}>
           <img src="https://via.placeholder.com/80.png" alt="Profile" />
@@ -77,9 +77,9 @@ const More = ({ header = 'More' }) => {
   );
 };
 
-More.propTypes = {
-  header: PropTypes.string.isRequired,
-};
+// More.propTypes = {
+//   header: PropTypes.string.isRequired,
+// };
 
 const connectedComponent = connect()(More);
 
