@@ -18,8 +18,7 @@ const Measurement = ({ value, title }) => (
 
 Measurement.propTypes = {
   value: PropTypes.number.isRequired,
-  // eslint-disable-next-line react/forbid-prop-types
-  title: PropTypes.array.isRequired,
+  title: PropTypes.string.isRequired,
 };
 
 export default Measurement;

@@ -28,29 +28,14 @@ export const groupMeasurementByMeasureId = (measurements, id) => {
   );
 };
 
-export const getMeasurements = (measures, measurements) => {
-  for (let i = 0; i < measurements.length; i += 1) {
-    const hashedMeasures = {};
-    const hashedMeasurements = {};
-
-    measures.forEach((measure) => {
-      hashedMeasures[measure.id] = { ...measure };
-    });
-
-    measurements.forEach((measurement) => {
-      hashedMeasurements[measurement.measure_id] = { ...measurement };
-    });
-
-    const measuresIds = Object.keys(hashedMeasures);
-
-    return measuresIds.map((id) => ({
-      id,
-      title: hashedMeasures[id].title,
-      image: hashedMeasures[id].image,
-      unit: hashedMeasures[id].unit,
-      value: hashedMeasurements[id].value,
-    }));
-  }
-
-  return [];
-};
+export const convertedData = (myData, myMeasure) => myData.map((data) => {
+  const newData = {};
+  newData.value = data.value;
+  newData.user_id = data.user_id;
+  newData.measure_id = data.measure_id;
+  newData.created_at = readableDate(data.created_at);
+  const title = myMeasure
+    .filter((measure) => (data.measure_id === measure.id ? measure.title : ''));
+  newData.title = title[0].title;
+  return (newData);
+});
