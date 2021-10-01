@@ -9,8 +9,10 @@ export const GET_MEASURE = 'GET_MEASURE';
 export const SET_MEASUREMENT = 'SET_MEASUREMENT';
 export const LOGGED_IN = 'LOGGED_IN';
 export const GET_USER = 'GET_USER';
+export const GET_ERRORS = 'GET_ERRORS';
+export const CLEAR_ERRORS = 'CLEAR_ERRORS';
 
-export const getMeasures = (measure) => ({
+export const CLEARMeasures = (measure) => ({
   type: GET_MEASURE,
   payload: measure,
 });

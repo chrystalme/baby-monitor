@@ -17,7 +17,7 @@ const TrackitList = () => {
   const myData = measurements.measurements;
   const myMeasure = measures.measures;
 
-  // console.log(convertedData(myData, myMeasure));
+  console.log(convertedData(myData, myMeasure));
   const result = groupMeasurementByCreatedAt(convertedData(myData, myMeasure), 'created_at');
 
   const dateAndDetails = Object.keys(result);

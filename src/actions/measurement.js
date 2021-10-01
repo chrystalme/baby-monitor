@@ -5,8 +5,11 @@ export const setMeasurement = (measurement) => ({
   payload: measurement,
 });
 
-export const getMeasurement = (measureId, value) => ({
+export const getMeasurement = (measureId,
+  value,
+  userId) => ({
   type: GET_MEASUREMENT,
   measureId,
   value,
+  userId,
 });

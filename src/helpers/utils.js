@@ -1,4 +1,4 @@
-import { groupBy, union } from 'lodash';
+import { groupBy, sumBy, union } from 'lodash';
 
 export const mergeMeasureWithMeasurement = (measures, measurements) => {
   const mergedObject = union(measurements, measures);
@@ -39,3 +39,5 @@ export const convertedData = (myData, myMeasure) => myData.map((data) => {
   newData.title = title[0].title;
   return (newData);
 });
+
+export const summed = (object, objectKey) => sumBy(object, objectKey);

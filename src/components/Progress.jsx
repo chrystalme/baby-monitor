@@ -1,17 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Nav from './Nav';
-import Footer from './Footer';
 
-const Progress = ({ header }) => (
-  <div>
-    <Nav name={header} />
-    <Footer />
+const Progress = ({ measurement }) => {
+  console.log(measurement);
+};
+(
+  <div style={{ marginTop: '4rem' }}>
+    {/* <h4>{measurement.Feet}</h4> */}
   </div>
+
 );
 
 Progress.propTypes = {
-  header: PropTypes.string.isRequired,
+  measurement: PropTypes.shape({
+    Feet: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
 export default Progress;

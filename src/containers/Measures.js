@@ -13,9 +13,10 @@ const Measures = () => {
   const [maxItemsPerPages] = useState(1);
   const [value, setValue] = useState(0);
   const measures = useSelector((state) => state.measures.measures);
+  const user = useSelector((state) => state.user);
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   const dispatch = useDispatch();
-  // const history = useHistory();
+  const { id } = user.user.attributes;
 
   if (!isAuthenticated) {
     // history.push('/login');
@@ -35,6 +36,14 @@ const Measures = () => {
     return setValue(value - 0.5);
   };
   const increment = () => setValue(value + 0.5);
+
+  // const handleNext = () => {
+
+  // };
+
+  // const handlePrev = () => {
+
+  // };
 
   useEffect(() => {
     axiosInstance
@@ -79,7 +88,7 @@ const Measures = () => {
                 onClick={
                   () => {
                     dispatch(
-                      getMeasurement(parseInt(measure.id, 10), value),
+                      getMeasurement(parseInt(measure.id, 10), value, id),
                     );
                     // setValue(0);
                       <Redirect to="/track-it" />;
@@ -96,7 +105,7 @@ const Measures = () => {
                 type="button"
                 name="Next"
                 onClick={() => {
-                  dispatch(getMeasurement(parseInt(measure.id, 10), value));
+                  dispatch(getMeasurement(parseInt(measure.id, 10), value, id));
                   setValue(0);
                   return (
                     currentPage < measures.length

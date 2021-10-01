@@ -1,6 +1,5 @@
 import * as actionTypes from '../actions/actionTypes';
 
-// const user = JSON.parse(localStorage.getItem('user_token'));
 const initialState = { isAuthenticated: false, user: null };
 
 const authReducer = (state = initialState, action) => {
