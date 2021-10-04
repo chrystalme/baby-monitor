@@ -1,5 +1,6 @@
 import axiosInstance from '../helpers/axios';
 import * as actionTypes from './actionTypes';
+import { returnErrors } from './errorActions';
 
 export const registerUser = (user) => (dispatch) => {
   axiosInstance
@@ -12,6 +13,7 @@ export const registerUser = (user) => (dispatch) => {
       });
     })
     .catch((err) => {
+      dispatch(returnErrors(err.response.data, err.response.status));
       dispatch({
         type: actionTypes.REGISTER_FAILURE,
         payload: err,
@@ -29,6 +31,7 @@ export const loginUser = (user) => (dispatch) => {
         payload: response.data,
       });
     }).catch((err) => {
+      dispatch(returnErrors(err.response.data, err.response.status));
       dispatch({
         type: actionTypes.LOGIN_FAILURE,
         payload: err,
@@ -54,5 +57,5 @@ export const getUser = () => (dispatch) => {
         type: actionTypes.GET_USER,
         payload: response.data.data,
       });
-    }).catch((err) => err);
+    }).catch((err) => { dispatch(returnErrors(err.response.data, err.response.status)); });
 };

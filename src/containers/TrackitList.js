@@ -17,11 +17,9 @@ const TrackitList = () => {
   const myData = measurements.measurements;
   const myMeasure = measures.measures;
 
-  console.log(convertedData(myData, myMeasure));
   const result = groupMeasurementByCreatedAt(convertedData(myData, myMeasure), 'created_at');
 
   const dateAndDetails = Object.keys(result);
-  // console.log(dateAndDetails);
 
   const handlePrev = () => (
     currentPage <= 1 ? currentPage : setCurrentPage(currentPage - 1)
@@ -41,8 +39,6 @@ const TrackitList = () => {
         next={handleNext}
       />
     ));
-    // value.value
-  // console.log(currentPage - 1);
   const listDetails = Object.values(result)[currentPage - 1]
     .map((value) => (
       <Measurement
@@ -50,8 +46,7 @@ const TrackitList = () => {
         value={value.value}
         text={value.value}
         title={value.title}
-        // title={myMeasure
-        // .map((measure) => (value.measure_id === measure.id ? measure.title : ''))}
+        unit={value.unit}
       />
     ));
 

@@ -1,47 +1,50 @@
 import * as actionTypes from '../actions/actionTypes';
 
-const initialState = { isAuthenticated: false, user: null };
+const initialState = {
+  token: localStorage.getItem('user_token'),
+  isAuthenticated: false,
+  isLoading: false,
+  user: null,
+};
 
 const authReducer = (state = initialState, action) => {
   const { type, payload } = action;
   switch (type) {
+    case actionTypes.LOGIN_SUCCESS:
     case actionTypes.REGISTER_SUCCESS:
       return {
         ...state,
+        ...payload,
         isAuthenticated: true,
-        user: payload,
+        isLoading: false,
       };
+    case actionTypes.LOGIN_FAILURE:
     case actionTypes.REGISTER_FAILURE:
+    case actionTypes.LOGOUT_SUCCESS:
+    case actionTypes.AUTH_ERROR:
       return {
         ...state,
         isAuthenticated: false,
+        isLoading: false,
+        token: null,
+        user: null,
       };
     case actionTypes.LOGGED_IN:
       return {
         ...state,
         isAuthenticated: true,
       };
-    case actionTypes.LOGIN_SUCCESS:
+    case actionTypes.USER_LOADING:
+      return {
+        ...state, isLoading: true,
+      };
+    case actionTypes.USER_LOADED:
       return {
         ...state,
         isAuthenticated: true,
-        user: payload,
+        isLoading: false,
+        user: action.payload,
       };
-    case actionTypes.LOGIN_FAILURE:
-      return {
-        isAuthenticated: false,
-        user: null,
-      };
-    case actionTypes.LOGOUT_SUCCESS:
-      return {
-        ...state,
-        isAuthenticated: false,
-        user: null,
-      };
-    // case actionTypes.GET_USER:
-    //   return {
-    //     ...state, name: action.payload.name, email: action.payload.email,
-    //   };
     default:
       return state;
   }

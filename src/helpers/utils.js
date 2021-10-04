@@ -37,6 +37,7 @@ export const convertedData = (myData, myMeasure) => myData.map((data) => {
   const title = myMeasure
     .filter((measure) => (data.measure_id === measure.id ? measure.title : ''));
   newData.title = title[0].title;
+  newData.unit = title[0].unit;
   return (newData);
 });
 

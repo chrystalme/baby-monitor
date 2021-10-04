@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { groupMeasurementByMeasureId, convertedData } from '../helpers/utils';
 import Nav from '../components/Nav';
 import Footer from '../components/Footer';
+import Example from './chart';
 
 const progress = () => {
   const measurements = useSelector((state) => state.measurements);
@@ -11,7 +12,7 @@ const progress = () => {
   const myMeasure = measures.measures;
 
   const result = (groupMeasurementByMeasureId(convertedData(myData, myMeasure), 'title'));
-  console.log(Object.entries(result));
+  // console.log(Object.entries(result));
   const getObj = () => {
     const data = [];
     // eslint-disable-next-line no-restricted-syntax
@@ -53,7 +54,8 @@ const progress = () => {
     <div>
       <Nav name="My Progress" />
       <div style={{ marginTop: '4rem' }}>
-        {dataBody}
+        {/* {dataBody} */}
+        <Example />
       </div>
       <Footer />
     </div>
