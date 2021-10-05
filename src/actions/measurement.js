@@ -7,13 +7,14 @@ export const setMeasurement = (measurement) => ({
   payload: measurement,
 });
 
-export const getMeasurement = (measureId, value) => (dispatch) => {
+export const getMeasurement = (data) => (dispatch) => {
   axiosInstance
-    .post('/api/v1/measurement/')
+    .post('/api/v1/measurement/', data)
     .then((response) => {
+      console.log(response.data);
       dispatch({
         type: GET_MEASUREMENT,
-        payload: response(JSON.parse(measureId, value)),
+        payload: response.data,
 
       });
     }).catch((err) => {

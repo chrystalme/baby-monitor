@@ -12,6 +12,11 @@ const Measures = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [maxItemsPerPages] = useState(1);
   const [value, setValue] = useState(0);
+  // const [data, setData] = useState({
+  //   measure_id: '',
+  //   value: '',
+  // });
+  // const { measureId, dataValue } = data;
   const measures = useSelector((state) => state.measures.measures);
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   const dispatch = useDispatch();
@@ -36,7 +41,7 @@ const Measures = () => {
   const increment = () => setValue(value + 0.5);
 
   // const handleNext = () => {
-  //   setPrev(0);
+  //   setData(...data);
   // };
 
   // const handlePrev = () => {
@@ -55,6 +60,7 @@ const Measures = () => {
   const list = measures
     .slice((currentPage * maxItemsPerPages) - maxItemsPerPages, currentPage * maxItemsPerPages)
     .map((measure) => (
+
       <div key={measure.title}>
         <AddMeasure
           header="Add Measurement"
@@ -85,10 +91,14 @@ const Measures = () => {
                 type="button"
                 onClick={
                   () => {
+                    const data = {
+                      measure_id: `${measure.id}`,
+                      value: `${value}`,
+                    };
+                    console.log(data);
                     dispatch(
-                      getMeasurement(parseInt(measure.id, 10), value),
+                      getMeasurement(data),
                     );
-                    // setValue(0);
                       <Redirect to="/track-it" />;
                   }
 }
@@ -103,8 +113,13 @@ const Measures = () => {
                 type="button"
                 name="Next"
                 onClick={() => {
-                  console.log(getMeasurement(parseInt(measure.id, 10), value));
-                  // dispatch(getMeasurement(parseInt(measure.id, 10), value));
+                  const data = {
+                    measure_id: `${measure.id}`,
+                    value: `${value}`,
+                  };
+                  console.log(data);
+                  // handleNext();
+                  dispatch(getMeasurement(data));
                   setValue(0);
                   return (
                     currentPage < measures.length

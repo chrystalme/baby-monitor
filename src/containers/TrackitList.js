@@ -20,7 +20,7 @@ const TrackitList = () => {
   const result = groupMeasurementByCreatedAt(convertedData(myData, myMeasure), 'created_at');
 
   const dateAndDetails = Object.keys(result);
-
+  // console.log(dateAndDetails.length);
   const handlePrev = () => (
     currentPage <= 1 ? currentPage : setCurrentPage(currentPage - 1)
   );
@@ -29,7 +29,7 @@ const TrackitList = () => {
       ? setCurrentPage(currentPage + 1)
       : currentPage);
 
-  const listTop = dateAndDetails
+  const listTop = dateAndDetails <= 0 ? (<span>No data!!</span>) : dateAndDetails
     .slice((currentPage * maxItemsPerPages) - maxItemsPerPages, currentPage * maxItemsPerPages)
     .map((measurement) => (
       <TrackItDate
@@ -39,7 +39,9 @@ const TrackitList = () => {
         next={handleNext}
       />
     ));
-  const listDetails = Object.values(result)[currentPage - 1]
+  const dataDetails = Object.values(result)[currentPage - 1];
+  // console.log(dataDetails.length);
+  const listDetails = dataDetails <= 0 ? (<span>No data!!!</span>) : dataDetails
     .map((value) => (
       <Measurement
         key={value.id}
