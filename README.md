@@ -50,7 +50,7 @@ npm run start
 
 #### Backend
 
-[Body Track](https://github.com/chrystalme/body-track)
+[Body Track](https://github.com/chrystalme/BodyTrack)
 
 ## Authors
 
