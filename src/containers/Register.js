@@ -6,8 +6,7 @@ import Nav from '../components/Nav';
 import style from '../style/login.module.css';
 
 const RegisterUser = () => {
-  const errorMessage = useSelector((state) => state.error.msg);
-  console.log(errorMessage);
+  const errorMessage = useSelector((state) => state.error.msg.message);
   const [user, setUser] = useState({
     name: '',
     email: '',
@@ -44,7 +43,7 @@ const RegisterUser = () => {
                 value={name}
                 name="name"
                 id="name"
-                autoComplete
+                autoComplete="false"
                 placeholder="Enter your name"
                 required
                 onChange={((e) => setUser({ ...user, name: e.target.value }))}
@@ -54,7 +53,7 @@ const RegisterUser = () => {
                 value={email}
                 name="email"
                 id="email"
-                autoComplete
+                autoComplete="false"
                 placeholder="Enter your email"
                 required
                 onChange={((e) => setUser({ ...user, email: e.target.value }))}

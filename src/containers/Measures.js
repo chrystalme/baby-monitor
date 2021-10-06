@@ -12,11 +12,6 @@ const Measures = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [maxItemsPerPages] = useState(1);
   const [value, setValue] = useState(0);
-  // const [data, setData] = useState({
-  //   measure_id: '',
-  //   value: '',
-  // });
-  // const { measureId, dataValue } = data;
   const measures = useSelector((state) => state.measures.measures);
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   const dispatch = useDispatch();
@@ -39,14 +34,6 @@ const Measures = () => {
     return setValue(value - 0.5);
   };
   const increment = () => setValue(value + 0.5);
-
-  // const handleNext = () => {
-  //   setData(...data);
-  // };
-
-  // const handlePrev = () => {
-  //   setPrev(value);
-  // };
 
   useEffect(() => {
     axiosInstance
@@ -95,7 +82,6 @@ const Measures = () => {
                       measure_id: `${measure.id}`,
                       value: `${value}`,
                     };
-                    console.log(data);
                     dispatch(
                       getMeasurement(data),
                     );
@@ -117,8 +103,6 @@ const Measures = () => {
                     measure_id: `${measure.id}`,
                     value: `${value}`,
                   };
-                  console.log(data);
-                  // handleNext();
                   dispatch(getMeasurement(data));
                   setValue(0);
                   return (
