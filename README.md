@@ -39,7 +39,7 @@ npm run start
 
 #### Live Link
 
-[Football Data](https://baby-monitor.netlify.app/)
+[Baby Monitor](https://baby-monitor.netlify.app/)
 
 ## Authors
 
