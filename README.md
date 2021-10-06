@@ -2,7 +2,12 @@
 
 ### This is a web application that is connected to a backend API that helps to track baby physiological development for the first 3 months. 
 
-![screenshot](../public/images/baby-1.png)
+![screenshot](./public/images/baby-4.png)
+![screenshot](./public/images/baby-3.png)
+![screenshot](./public/images/baby-1.png)
+![screenshot](./public/images/baby-2.png)
+![screenshot](./public/images/baby-5.png)
+![screenshot](./public/images/baby-6.png)
 
 ### The following technicalities were implemented in the application
 - lifting up state
