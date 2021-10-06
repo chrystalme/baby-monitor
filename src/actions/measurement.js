@@ -2,10 +2,18 @@ import axiosInstance from '../helpers/axios';
 import { GET_MEASUREMENT, SET_MEASUREMENT } from './actionTypes';
 import { returnErrors } from './errorActions';
 
-export const setMeasurement = (measurement) => ({
-  type: SET_MEASUREMENT,
-  payload: measurement,
-});
+export const setMeasurement = () => (dispatch) => {
+  axiosInstance
+    .get('/api/v1/measurement')
+    .then((response) => {
+      const { data } = response;
+      dispatch({
+        type: SET_MEASUREMENT,
+        payload: data,
+      });
+    })
+    .catch((err) => dispatch(returnErrors(err.response.data, err.response.status)));
+};
 
 export const getMeasurement = (data) => (dispatch) => {
   axiosInstance
@@ -14,8 +22,10 @@ export const getMeasurement = (data) => (dispatch) => {
       console.log(response.data);
       dispatch({
         type: GET_MEASUREMENT,
-        payload: response.data,
-
+        payload: {
+          measure_id: data.measure_id,
+          value: data.value,
+        },
       });
     }).catch((err) => {
       dispatch(returnErrors(err.response.data, err.response.status));

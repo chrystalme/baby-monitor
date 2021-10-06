@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Redirect, useHistory } from 'react-router-dom';
 import { connect, useDispatch, useSelector } from 'react-redux';
 import { setMeasurement } from '../actions/measurement';
@@ -98,10 +98,6 @@ const mapStateToProps = (state) => ({
   user: state.auth.user,
   isAuthenticated: state.auth.isAuthenticated,
 });
-
-// LoginUser.propTypes = {
-//   handleSubmit: PropTypes.func.isRequired,
-// };
 
 const ConnectedComponent = connect(mapStateToProps, mapDispatchToProps)(LoginUser);
 

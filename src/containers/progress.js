@@ -12,20 +12,6 @@ const progress = () => {
   const myMeasure = measures.measures;
 
   const result = (groupMeasurementByMeasureId(convertedData(myData, myMeasure), 'title'));
-  // console.log(Object.entries(result));
-  const getObj = () => {
-    const data = [];
-    // eslint-disable-next-line no-restricted-syntax
-    for (const [key, value] of Object.entries(result)) {
-      const newObj = {};
-      newObj.title = key;
-      // eslint-disable-next-line no-return-assign
-      value.map((val, i) => (newObj[`value${i}`] = val.value));
-      data.push(newObj);
-    }
-    return data;
-  };
-  console.log(getObj());
 
   const dataBody = [];
   for (let i = 0; i < Object.keys(result).length; i += 1) {
@@ -54,7 +40,6 @@ const progress = () => {
     <div>
       <Nav name="My Progress" />
       <div style={{ marginTop: '4rem' }}>
-        {/* {dataBody} */}
         <Example />
       </div>
       <Footer />

@@ -12,7 +12,6 @@ const Example = () => {
   const myMeasure = measures.measures;
 
   const result = (groupMeasurementByMeasureId(convertedData(myData, myMeasure), 'title'));
-  // console.log(Object.entries(result));
   const getObj = () => {
     const data = [];
     // eslint-disable-next-line no-restricted-syntax
@@ -26,9 +25,9 @@ const Example = () => {
     }
     return data;
   };
-  // console.log(getObj());
+
   const data = getObj();
-  // console.log(data);
+
   return (
     <ResponsiveContainer width="100%" aspect={0.9}>
       <BarChart
@@ -37,7 +36,7 @@ const Example = () => {
         data={data}
         margin={{
           top: 20,
-          right: 30,
+          right: 20,
           left: 20,
           bottom: 5,
         }}

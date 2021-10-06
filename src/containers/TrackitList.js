@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 import Measurement from '../components/Measurement';
 import Nav from '../components/Nav';
 import Footer from '../components/Footer';
@@ -20,7 +20,6 @@ const TrackitList = () => {
   const result = groupMeasurementByCreatedAt(convertedData(myData, myMeasure), 'created_at');
 
   const dateAndDetails = Object.keys(result);
-  // console.log(dateAndDetails.length);
   const handlePrev = () => (
     currentPage <= 1 ? currentPage : setCurrentPage(currentPage - 1)
   );
@@ -29,19 +28,18 @@ const TrackitList = () => {
       ? setCurrentPage(currentPage + 1)
       : currentPage);
 
-  const listTop = dateAndDetails <= 0 ? (<span>No data!!</span>) : dateAndDetails
+  const listTop = dateAndDetails === undefined ? <span>No data!!</span> : dateAndDetails
     .slice((currentPage * maxItemsPerPages) - maxItemsPerPages, currentPage * maxItemsPerPages)
     .map((measurement) => (
       <TrackItDate
-        key={measurement.id}
+        key={measurement}
         createdAt={measurement}
         prev={handlePrev}
         next={handleNext}
       />
     ));
   const dataDetails = Object.values(result)[currentPage - 1];
-  // console.log(dataDetails.length);
-  const listDetails = dataDetails <= 0 ? (<span>No data!!!</span>) : dataDetails
+  const listDetails = dataDetails === undefined ? <span>No data!!!</span> : dataDetails
     .map((value) => (
       <Measurement
         key={value.id}
@@ -67,4 +65,5 @@ const TrackitList = () => {
   );
 };
 
-export default TrackitList;
+const ConnectedComponent = connect()(TrackitList);
+export default ConnectedComponent;

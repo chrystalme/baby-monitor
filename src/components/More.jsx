@@ -1,15 +1,24 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-// import PropTypes from 'prop-types';
 import { connect, useDispatch, useSelector } from 'react-redux';
 import Nav from './Nav';
 import Footer from './Footer';
 import style from '../style/more.module.css';
-import { logout } from '../actions/authActions';
+import { getUser, logout } from '../actions/authActions';
+import axiosInstance from '../helpers/axios';
 
 const More = () => {
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
+  useEffect(() => {
+    axiosInstance.get('/user_info')
+      .then((res) => {
+        const { data } = res.data;
+        dispatch(getUser(data));
+      })
+      .catch((err) => err);
+  }, []);
+
   const handleLogout = () => {
     const userToken = localStorage.getItem('user_token');
     if (userToken) {
@@ -17,7 +26,6 @@ const More = () => {
     }
     dispatch(logout());
   };
-  // console.log(user.user.attributes.name);
 
   return (
     <>
@@ -76,10 +84,6 @@ const More = () => {
     </>
   );
 };
-
-// More.propTypes = {
-//   header: PropTypes.string.isRequired,
-// };
 
 const connectedComponent = connect()(More);
 

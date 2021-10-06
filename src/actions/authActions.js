@@ -41,6 +41,12 @@ export const loginUser = (user) => (dispatch) => {
 
 export const logout = () => ({
   type: actionTypes.LOGOUT_SUCCESS,
+  payload: {
+    measure: null,
+    measurement: null,
+    user: null,
+    error: null,
+  },
 });
 
 export const returningUser = () => (dispatch) => {

@@ -7,7 +7,6 @@ const measurementReducer = (state = {}, action) => {
         ...state,
         measureId: action.measureId,
         value: action.value,
-        title: action.title,
       };
     case actionType.SET_MEASUREMENT:
       return { ...state, measurements: action.payload };
