@@ -5,17 +5,22 @@
 }
 
 .itemContainer {
-  @apply grid text-gray-darkest; }
+  @apply grid text-gray-darkest;
+}
 
 .item {
   @apply inline-flex gap-4 justify-items-end pl-4 w-full
-    bg-gray-light py-3 border-b border-gray-lightest; }
+    bg-gray-light py-3 border-b border-gray-lightest;
+}
 
 .itemTop {
-  @apply flex flex-row gap-4 pl-4 py-4 items-center; }
+  @apply flex flex-row gap-4 pl-4 py-4 items-center;
+}
 
 .itemTop span {
-  @apply text-blue-dark text-xs; }
+  @apply text-blue-dark text-xs;
+}
 
 .itemTop img {
-  @apply rounded-full border-blue-dark border; }
+  @apply rounded-full border-blue-dark border;
+}

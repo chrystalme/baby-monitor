@@ -1,8 +1,10 @@
 @import '../index.css';
 
 .container {
-  @apply w-full border-collapse absolute bottom-0 grid gap-0 grid-rows-1 grid-cols-4 items-center; }
+  @apply w-full border-collapse absolute bottom-0 grid gap-0 grid-rows-1 grid-cols-4 items-center;
+}
 
 .item {
   @apply  text-gray-light text-sm
-    bg-gray-dark text-center h-full flex flex-col justify-center items-center; }
+    bg-gray-dark text-center h-full flex flex-col justify-center items-center;
+}
