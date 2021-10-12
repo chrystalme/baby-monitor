@@ -1,12 +1,10 @@
 @import '../index.css';
+
 .container {
-  @apply h-full
-}
+  @apply h-full; }
 
 .btnGroup {
-  @apply flex flex-col  h-auto gap-5 my-52
-}
+  @apply flex flex-col  h-auto gap-5 my-52; }
 
 .btnGroup a {
-  @apply mx-auto w-3/4 bg-blue-dark text-lg font-sans text-center py-2 
-}
+  @apply mx-auto w-3/4 bg-blue-dark text-lg font-sans text-center py-2; }

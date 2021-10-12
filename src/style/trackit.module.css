@@ -5,13 +5,10 @@
 }
 
 .itemTop {
-  @apply text-center py-4 flex-row flex justify-around items-center
-}
+  @apply text-center py-4 flex-row flex justify-around items-center; }
 
 .ringContainer {
-  @apply flex flex-row gap-2 flex-wrap justify-center items-center mt-20
-}
+  @apply flex flex-row gap-2 flex-wrap justify-center items-center mt-20; }
 
 .circularRing {
-  @apply px-4 w-2/5 h-2/5 flex flex-col
-}
+  @apply px-4 w-2/5 h-2/5 flex flex-col; }

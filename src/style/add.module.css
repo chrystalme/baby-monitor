@@ -5,39 +5,33 @@
 }
 
 .itemTop {
-  @apply text-center py-4
-}
+  @apply text-center py-4; }
 
 .valueContainer {
-  @apply  mt-16
-}
+  @apply mt-16; }
 
 .btnGroup {
-  @apply text-center p-4
-}
+  @apply text-center p-4; }
 
 /* .btnGroup:last-child {
   @apply mb-8 gap-1
 } */
 
 .innerContainer {
-  @apply bg-gray-light py-8
-}
+  @apply bg-gray-light py-8; }
 
 .valuePlace {
-  @apply flex flex-col items-center 
-  justify-center text-center rounded-full h-64 w-64 
-  bg-gray-lightest mx-auto
-}
+  @apply flex flex-col items-center
+    justify-center text-center rounded-full h-64 w-64
+  bg-gray-lightest mx-auto; }
+
 .valuePlace input {
   @apply font-sans font-thin text-3xl bg-gray-lightest w-16 text-center;
 }
 
 .btnSign {
-  @apply m-1 px-2 py-1 text-gray bg-gray-lightest
-}
+  @apply m-1 px-2 py-1 text-gray bg-gray-lightest; }
 
 .btnNext {
   @apply px-14 py-4 font-sans font-normal text-xl text-gray bg-gray-lightest rounded-sm
-  hover:bg-green-dark hover:text-gray-lightest hover:scale-75
-}
+    hover:bg-green-dark hover:text-gray-lightest hover:scale-75; }
