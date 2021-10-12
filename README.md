@@ -1,6 +1,6 @@
 # Baby Monitor 
 
-### This is a web application that is connected to a backend API that helps to track baby physiological development for the first 3 months. 
+### This is a web application that is connected to a backend API that helps to track baby physiological development for the first 3 months.
 
 ![screenshot](./public/images/baby-4.png)
 ![screenshot](./public/images/baby-3.png)
@@ -47,6 +47,10 @@ npm run start
 #### Live Link
 
 [Baby Monitor](https://baby-monitor.netlify.app/)
+
+#### Backend
+
+[Body Track](https://github.com/chrystalme/BodyTrack)
 
 ## Authors
 
