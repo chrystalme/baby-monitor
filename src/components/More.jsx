@@ -5,18 +5,31 @@ import Nav from './Nav';
 import Footer from './Footer';
 import style from '../style/more.module.css';
 import { getUser, logout } from '../actions/authActions';
-import axiosInstance from '../helpers/axios';
+// import axiosInstance from '../helpers/axios';
 
 const More = () => {
   const user = useSelector((state) => state.user);
+  console.log(user);
   const dispatch = useDispatch();
+  // const userData = getUser();
+  // console.log(userData);
+  // useEffect(() => {
+  //   // axiosInstance.get('/user_info')
+  //   //   .then((res) => {
+  //   //     const { data } = res.data;
+  //   //     dispatch(getUser(data));
+  //   //   })
+  //   //   .catch((err) => err);
+  //   dispatch(getUser());
+  // }, []);
+
   useEffect(() => {
-    axiosInstance.get('/user_info')
-      .then((res) => {
-        const { data } = res.data;
-        dispatch(getUser(data));
-      })
-      .catch((err) => err);
+  //   axiosInstance.get('/user_info')
+  //     .then((res) => {
+  //       const { data } = res.data;
+    dispatch(getUser());
+  //     })
+  //     .catch((err) => err);
   }, []);
 
   const handleLogout = () => {
@@ -34,7 +47,7 @@ const More = () => {
         <div className={style.itemTop}>
           <img src="https://via.placeholder.com/80.png" alt="Profile" />
           <div>
-            <h4 style={{ lineHeight: '2px' }}>{user.user.attributes.name}</h4>
+            <h4 style={{ lineHeight: '2px' }}>{user && user.user.attributes.name }</h4>
             <span>Male</span>
           </div>
         </div>

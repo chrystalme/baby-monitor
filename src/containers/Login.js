@@ -1,16 +1,17 @@
-import React, { useEffect, useState } from 'react';
-import { Redirect, useHistory } from 'react-router-dom';
+import React, { /* useEffect, */ useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import { connect, useDispatch, useSelector } from 'react-redux';
-import { setMeasurement } from '../actions/measurement';
+// import { setMeasurement } from '../actions/measurement';
 import style from '../style/login.module.css';
 import Nav from '../components/Nav';
-import { getUser, loginUser, returningUser } from '../actions/authActions';
-import axiosInstance from '../helpers/axios';
+import { /* getUser, */ loginUser, returningUser } from '../actions/authActions';
+// import axiosInstance from '../helpers/axios';
 
 const LoginUser = () => {
   const [inputs, setInputs] = useState({ email: '', password: '' });
   const { email, password } = inputs;
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+  const errorMessage = useSelector((state) => state.error.msg);
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -28,46 +29,49 @@ const LoginUser = () => {
     });
   };
 
-  const setMeasurements = () => {
-    axiosInstance
-      .get('/api/v1/measurement')
-      .then((response) => {
-        const { data } = response;
-        dispatch(setMeasurement(data));
-      })
-      .catch((err) => err);
-  };
-  useEffect(() => {
-    setMeasurements();
-  }, []);
+  // const setMeasurements = () => {
+  //   axiosInstance
+  //     .get('/api/v1/measurement')
+  //     .then((response) => {
+  //       const { data } = response;
+  //       dispatch(setMeasurement(data));
+  //     })
+  //     .catch((err) => err);
+  // };
+  // useEffect(() => {
+  //   setMeasurements();
+  // }, []);
 
-  useEffect(() => {
-    axiosInstance.get('/user_info')
-      .then((res) => {
-        const { data } = res.data;
-        dispatch(getUser(data));
-      })
-      .catch((err) => err);
-  }, []);
+  // useEffect(() => {
+  //   axiosInstance.get('/user_info')
+  //     .then((res) => {
+  //       const { data } = res.data;
+  //       dispatch(getUser(data));
+  //     })
+  //     .catch((err) => err);
+  // }, []);
 
   if (isAuthenticated) {
-    // check history if it is working
     history.push('/measures');
-    return <Redirect to="/measures" />;
   }
 
   return (
     <>
       <Nav name="Login" />
-      <form onSubmit={handleSubmit} />
       <div className={style.container}>
         <form onSubmit={handleSubmit}>
+          {
+          errorMessage && (
+            <span style={{ color: 'red' }} className="mx-auto pl-28 text-center">{errorMessage.message}</span>
+          )
+}
           <div className={style.itemContainer}>
             <input
               type="email"
               name="email"
               value={email}
               id="email"
+              autoComplete="false"
               placeholder="Enter your email"
               required
               onChange={(e) => setInputs({ ...inputs, email: e.target.value })}
@@ -77,6 +81,7 @@ const LoginUser = () => {
               name="password"
               value={password}
               id="password"
+              autoComplete="false"
               placeholder="Enter your password"
               required
               onChange={(e) => setInputs({ ...inputs, password: e.target.value })}

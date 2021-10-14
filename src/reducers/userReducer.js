@@ -1,6 +1,6 @@
 import * as actionType from '../actions/actionTypes';
 
-const userReducer = (state = null, action) => {
+const userReducer = (state = [], action) => {
   switch (action.type) {
     case actionType.GET_USER:
       return { ...state, user: action.payload };
