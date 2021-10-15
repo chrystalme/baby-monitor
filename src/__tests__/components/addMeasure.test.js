@@ -4,14 +4,22 @@ import { render } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import Routes from '../../components/Routes';
 import store from '../../store';
-import Footer from '../../components/Footer';
+import AddMeasure from '../../components/AddMeasure';
 
 describe('Footer', () => {
   test('Footer component is rendered correctly', () => {
     const component = render(
       <Provider store={store}>
         <Routes>
-          <Footer />
+          <AddMeasure
+            unit="cm"
+            header="Add measure"
+            value={35}
+            changeHandler={() => undefined}
+            type="Head circumference"
+            increment={() => undefined}
+            decrement={() => undefined}
+          />
           ,
         </Routes>
         ,

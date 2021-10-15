@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-// import { CircularProgressbar } from 'react-circular-progressbar';
 import style from '../style/trackit.module.css';
 
 const TrackItDate = ({
@@ -24,9 +23,6 @@ const TrackItDate = ({
         </button>
       </div>
     </div>
-    {/* <div className={style.circularRing}>
-      <CircularProgressbar value={value} text={value} />
-    </div> */}
   </>
 );
 
@@ -34,7 +30,6 @@ TrackItDate.propTypes = {
   createdAt: PropTypes.string.isRequired,
   prev: PropTypes.func.isRequired,
   next: PropTypes.func.isRequired,
-  // value: PropTypes.number.isRequired,
 };
 
 export default TrackItDate;

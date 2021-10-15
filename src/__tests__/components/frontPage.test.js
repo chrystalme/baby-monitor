@@ -4,14 +4,14 @@ import { render } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import Routes from '../../components/Routes';
 import store from '../../store';
-import Footer from '../../components/Footer';
+import Frontpage from '../../components/FrontPage';
 
-describe('Footer', () => {
-  test('Footer component is rendered correctly', () => {
+describe('FrontPage', () => {
+  test('FrontPage component is rendered correctly', () => {
     const component = render(
       <Provider store={store}>
         <Routes>
-          <Footer />
+          <Frontpage />
           ,
         </Routes>
         ,

@@ -30,3 +30,14 @@ export const auth = {
   isLoading: false,
   user: null,
 };
+
+export const loginData = {
+  email: 'test@test.com',
+  password: '123456',
+};
+export const registerData = {
+  name: 'Mr Tester',
+  email: 'test@test.com',
+  password: '123456',
+  password_confirmation: '123456',
+};
