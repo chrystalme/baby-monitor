@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { connect, useDispatch, useSelector } from 'react-redux';
-import { Redirect } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import axiosInstance from '../helpers/axios';
 import AddMeasure from '../components/AddMeasure';
 import { getMeasures } from '../actions/actionTypes';
@@ -15,11 +15,12 @@ const Measures = () => {
   const measures = useSelector((state) => state.measures.measures);
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   const dispatch = useDispatch();
+  const history = useHistory();
 
   if (!isAuthenticated) {
-    // history.push('/login');
-    return (<Redirect to="/login" />);
+    history.push('/front-page');
   }
+
   const handleValueChange = (e) => {
     if (value) {
       setValue(parseFloat(e.target.value));
@@ -63,6 +64,7 @@ const Measures = () => {
             className={style.btnNext}
             type="button"
             name="Previous"
+            disabled
             onClick={() => (
               currentPage <= 1
                 ? currentPage
@@ -85,7 +87,7 @@ const Measures = () => {
                     dispatch(
                       getMeasurement(data),
                     );
-                      <Redirect to="/track-it" />;
+                    history.push('/track-it');
                   }
 }
                 name="Submit"

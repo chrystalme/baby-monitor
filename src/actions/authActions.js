@@ -6,7 +6,7 @@ export const registerUser = (user) => (dispatch) => {
   axiosInstance
     .post('/signup', user)
     .then((response) => {
-      localStorage.setItem('user_token', JSON.stringify(response.data));
+      localStorage.setItem('user_token', JSON.stringify(response.data.auth_token));
       dispatch({
         type: actionTypes.REGISTER_SUCCESS,
         user: response.data,

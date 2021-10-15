@@ -13,7 +13,3 @@ ReactDOM.render(
   </React.StrictMode>,
   document.getElementById('root'),
 );
-
-// window.onbeforeunload = () => {
-//   localStorage.clear();
-// };

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect, useSelector } from 'react-redux';
 import Measurement from '../components/Measurement';
 import Nav from '../components/Nav';
@@ -7,8 +7,12 @@ import 'react-circular-progressbar/dist/styles.css';
 import TrackItDate from '../components/TrackItDate';
 import { convertedData, groupMeasurementByCreatedAt } from '../helpers/utils';
 import style from '../style/trackit.module.css';
+import { setMeasurement } from '../actions/measurement';
 
 const TrackitList = () => {
+  useEffect(() => {
+    setMeasurement();
+  }, []);
   const measurements = useSelector((state) => state.measurements);
   const measures = useSelector((state) => state.measures);
 
@@ -28,7 +32,7 @@ const TrackitList = () => {
       ? setCurrentPage(currentPage + 1)
       : currentPage);
 
-  const listTop = dateAndDetails === undefined ? <span>No data!!</span> : dateAndDetails
+  const listTop = dateAndDetails === undefined ? <span>No data here yet !!!</span> : dateAndDetails
     .slice((currentPage * maxItemsPerPages) - maxItemsPerPages, currentPage * maxItemsPerPages)
     .map((measurement) => (
       <TrackItDate
@@ -39,16 +43,17 @@ const TrackitList = () => {
       />
     ));
   const dataDetails = Object.values(result)[currentPage - 1];
-  const listDetails = dataDetails === undefined ? <span>No data!!!</span> : dataDetails
-    .map((value) => (
-      <Measurement
-        key={value.id}
-        value={value.value}
-        text={value.value}
-        title={value.title}
-        unit={value.unit}
-      />
-    ));
+  const listDetails = dataDetails === undefined
+    ? <span>No data!!!</span> : dataDetails
+      .map((value) => (
+        <Measurement
+          key={value.id}
+          value={value.value}
+          text={value.value}
+          title={value.title}
+          unit={value.unit}
+        />
+      ));
 
   return (
     (

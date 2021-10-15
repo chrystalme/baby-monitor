@@ -7,6 +7,7 @@ import style from '../style/login.module.css';
 
 const RegisterUser = () => {
   const errorMessage = useSelector((state) => state.error.msg);
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   const history = useHistory();
   const [user, setUser] = useState({
     name: '',
@@ -28,7 +29,7 @@ const RegisterUser = () => {
     });
   };
 
-  if (localStorage.getItem('user_token')) {
+  if (isAuthenticated) {
     history.push('/measures');
   }
 
