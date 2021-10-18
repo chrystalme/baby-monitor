@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { connect, useSelector } from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { connect, useSelector, useDispatch } from 'react-redux';
 import Measurement from '../components/Measurement';
 import Nav from '../components/Nav';
 import Footer from '../components/Footer';
@@ -7,6 +7,8 @@ import 'react-circular-progressbar/dist/styles.css';
 import TrackItDate from '../components/TrackItDate';
 import { convertedData, groupMeasurementByCreatedAt } from '../helpers/utils';
 import style from '../style/trackit.module.css';
+import { setMeasurement } from '../actions/measurement';
+import axiosInstance from '../helpers/axios';
 
 const TrackitList = () => {
   const measurements = useSelector((state) => state.measurements);
@@ -16,6 +18,21 @@ const TrackitList = () => {
   const [maxItemsPerPages] = useState(1);
   const myData = measurements.measurements;
   const myMeasure = measures.measures;
+
+  const dispatch = useDispatch();
+
+  const setMeasurements = () => {
+    axiosInstance
+      .get('/api/v1/measurement')
+      .then((response) => {
+        const { data } = response;
+        dispatch(setMeasurement(data));
+      })
+      .catch((err) => err);
+  };
+  useEffect(() => {
+    setMeasurements();
+  }, [measurements.length]);
 
   const result = groupMeasurementByCreatedAt(convertedData(myData, myMeasure), 'created_at');
 
