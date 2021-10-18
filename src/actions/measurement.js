@@ -18,12 +18,11 @@ export const setMeasurement = () => (dispatch) => {
 export const getMeasurement = (data) => (dispatch) => {
   axiosInstance
     .post('/api/v1/measurement/', data)
-    .then((response) => {
+    .then(() => {
       dispatch({
         type: GET_MEASUREMENT,
         payload: data,
       });
-      console.log(response.data);
     }).catch((err) => {
       dispatch(returnErrors(err.response.data, err.response.status));
     });
