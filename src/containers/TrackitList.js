@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { connect, useSelector } from 'react-redux';
 import Measurement from '../components/Measurement';
 import Nav from '../components/Nav';
@@ -7,12 +7,8 @@ import 'react-circular-progressbar/dist/styles.css';
 import TrackItDate from '../components/TrackItDate';
 import { convertedData, groupMeasurementByCreatedAt } from '../helpers/utils';
 import style from '../style/trackit.module.css';
-import { setMeasurement } from '../actions/measurement';
 
 const TrackitList = () => {
-  useEffect(() => {
-    setMeasurement();
-  }, []);
   const measurements = useSelector((state) => state.measurements);
   const measures = useSelector((state) => state.measures);
 
