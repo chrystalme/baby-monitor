@@ -1,0 +1,17 @@
+@import '../index.css';
+
+.container {
+  @apply relative top-16;
+}
+
+.itemContainer {
+  @apply grid text-gray-darkest mt-6;
+}
+
+.itemContainer input {
+  @apply w-3/4 my-2 mx-auto py-2 pl-2 border border-solid border-gray-light rounded-sm;
+}
+
+.btn {
+  @apply bg-blue-dark;
+}

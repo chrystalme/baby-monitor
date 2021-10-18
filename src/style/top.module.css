@@ -1,0 +1,9 @@
+@import '../index.css';
+
+.top {
+  @apply bg-blue-dark h-16 absolute top-0 left-0 w-full;
+}
+
+.topText {
+  @apply relative font-sans text-gray-lightest text-center top-7;
+}
