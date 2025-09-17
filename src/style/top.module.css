@@ -1,4 +1,4 @@
-@import '../index.css';
+/* @import '../index.css'; */
 
 .top {
   @apply bg-blue-dark h-16 absolute top-0 left-0 w-full;

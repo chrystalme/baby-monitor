@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { connect, useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setMeasurement } from '../actions/measurement';
 import style from '../style/login.module.css';
 import Nav from '../components/Nav';
@@ -15,10 +15,13 @@ const LoginUser = () => {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const user = localStorage.getItem('user_token');
-  if (user) {
-    dispatch(returningUser());
-  }
+  // run once on mount: if token present, mark returning user
+  useEffect(() => {
+    const user = localStorage.getItem('user_token');
+    if (user) {
+      dispatch(returningUser());
+    }
+  }, [dispatch]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -38,33 +41,41 @@ const LoginUser = () => {
       })
       .catch((err) => err);
   };
-  useEffect(() => {
-    setMeasurements();
-  }, []);
 
   useEffect(() => {
-    axiosInstance.get('/user_info')
+    setMeasurements();
+  }, []); // run once
+
+  useEffect(() => {
+    axiosInstance
+      .get('/user_info')
       .then((res) => {
         const { data } = res.data;
         dispatch(getUser(data));
       })
       .catch((err) => err);
-  }, []);
+  }, [dispatch]);
 
-  if (isAuthenticated) {
-    history.push('/measures');
-  }
+  // redirect when auth state becomes true
+  useEffect(() => {
+    if (isAuthenticated) {
+      history.push('/measures');
+    }
+  }, [isAuthenticated, history]);
 
   return (
     <>
       <Nav name="Login" />
       <div className={style.container}>
         <form onSubmit={handleSubmit}>
-          {
-          errorMessage && (
-            <span style={{ color: 'red' }} className="mx-auto pl-28 text-center">{errorMessage.message}</span>
-          )
-}
+          {errorMessage && (
+            <span
+              style={{ color: 'red' }}
+              className="mx-auto pl-28 text-center"
+            >
+              {errorMessage.message}
+            </span>
+          )}
           <div className={style.itemContainer}>
             <input
               type="email"
@@ -91,19 +102,7 @@ const LoginUser = () => {
         </form>
       </div>
     </>
-
   );
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  handleSubmit: (e) => dispatch(loginUser(e)),
-});
-
-const mapStateToProps = (state) => ({
-  user: state.auth.user,
-  isAuthenticated: state.auth.isAuthenticated,
-});
-
-const ConnectedComponent = connect(mapStateToProps, mapDispatchToProps)(LoginUser);
-
-export default ConnectedComponent;
+export default LoginUser;

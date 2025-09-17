@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { connect, useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import axiosInstance from '../helpers/axios';
 import AddMeasure from '../components/AddMeasure';
@@ -17,9 +17,13 @@ const Measures = () => {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  if (!isAuthenticated) {
-    history.push('/front-page');
-  }
+  // redirect only when there is no token in localStorage and auth state is explicitly false
+  useEffect(() => {
+    const token = localStorage.getItem('user_token');
+    if (!token && isAuthenticated === false) {
+      history.push('/front-page');
+    }
+  }, [isAuthenticated, history]);
 
   const handleValueChange = (e) => {
     if (value) {
@@ -46,9 +50,11 @@ const Measures = () => {
   }, [measures.length]);
 
   const list = measures
-    .slice((currentPage * maxItemsPerPages) - maxItemsPerPages, currentPage * maxItemsPerPages)
+    .slice(
+      currentPage * maxItemsPerPages - maxItemsPerPages,
+      currentPage * maxItemsPerPages,
+    )
     .map((measure) => (
-
       <div key={measure.title}>
         <AddMeasure
           header="Add Measurement"
@@ -65,69 +71,53 @@ const Measures = () => {
             type="button"
             name="Previous"
             disabled
-            onClick={() => (
-              currentPage <= 1
-                ? currentPage
-                : setCurrentPage(currentPage - 1))}
+            onClick={() => (currentPage <= 1 ? currentPage : setCurrentPage(currentPage - 1))}
           >
             Prev
           </button>
           {' '}
-          { currentPage === measures.length
-            ? (
-              <button
-                className={style.btnNext}
-                type="button"
-                onClick={
-                  () => {
-                    const data = {
-                      measure_id: `${measure.id}`,
-                      value: `${value}`,
-                    };
-                    dispatch(
-                      getMeasurement(data),
-                    );
-                    history.push('/track-it');
-                  }
-}
-                name="Submit"
-              >
-                Submit
-              </button>
-            )
-            : (
-              <button
-                className={style.btnNext}
-                type="button"
-                name="Next"
-                onClick={() => {
-                  const data = {
-                    measure_id: `${measure.id}`,
-                    value: `${value}`,
-                  };
-                  dispatch(getMeasurement(data));
-                  setValue(0);
-                  return (
-                    currentPage < measures.length
-                      ? setCurrentPage(currentPage + 1)
-                      : currentPage);
-                }}
-              >
-                Next
-              </button>
-            )}
-
+          {currentPage === measures.length ? (
+            <button
+              className={style.btnNext}
+              type="button"
+              onClick={() => {
+                const data = {
+                  measure_id: `${measure.id}`,
+                  value: `${value}`,
+                };
+                dispatch(getMeasurement(data));
+                history.push('/track-it');
+              }}
+              name="Submit"
+            >
+              Submit
+            </button>
+          ) : (
+            <button
+              className={style.btnNext}
+              type="button"
+              name="Next"
+              onClick={() => {
+                const data = {
+                  measure_id: `${measure.id}`,
+                  value: `${value}`,
+                };
+                dispatch(getMeasurement(data));
+                setValue(0);
+                return currentPage < measures.length
+                  ? setCurrentPage(currentPage + 1)
+                  : currentPage;
+              }}
+            >
+              Next
+            </button>
+          )}
         </div>
         <Footer />
       </div>
-
     ));
 
-  return (
-    <>{list}</>
-  );
+  return <>{list}</>;
 };
 
-const ConnectedComponent = connect()(Measures);
-
-export default ConnectedComponent;
+export default Measures;

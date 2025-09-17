@@ -1,4 +1,4 @@
-@import '../index.css';
+/* @import '../index.css'; */
 
 .container {
   @apply w-full border-collapse absolute bottom-0 grid gap-0 grid-rows-1 grid-cols-4 items-center;

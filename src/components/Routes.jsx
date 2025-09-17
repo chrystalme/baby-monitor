@@ -1,10 +1,8 @@
 import React from 'react';
-import {
-  BrowserRouter, Switch, Route,
-} from 'react-router-dom';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import AddMeasure from './AddMeasure';
 import App from './App';
-import TrackitList from '../containers/TrackitList';
+import TrackItList from '../containers/TrackItList';
 import Progress from '../containers/progress';
 import More from './More';
 import Login from '../containers/Login';
@@ -17,7 +15,7 @@ const Routes = () => (
     <Switch>
       <Route exact path="/" component={App} />
       <Route path="/add-measure" component={AddMeasure} />
-      <Route path="/track-it" component={TrackitList} />
+      <Route path="/track-it" component={TrackItList} />
       <Route path="/measures" component={Measures} />
       <Route path="/your-progress" component={Progress} />
       <Route path="/more" component={More} />
